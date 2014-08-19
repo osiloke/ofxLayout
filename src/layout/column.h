@@ -1,0 +1,36 @@
+//
+//  column.h
+//  signage
+//
+//  A column layout places objects horizontally i.e Members always have max height
+//  Created by Osiloke Emoekpere on 4/17/14.
+//
+//
+
+#ifndef __signage__column__
+#define __signage__column__
+#include "layout.h"
+#include <iostream>
+namespace Kabbou{
+    class ColumnLayout:public FluidLayout{
+    public:
+        ColumnLayout(): FluidLayout("column"){};
+        
+        void add(Kabbou::Section &section, float w_percent=1.0f, float padding=0.0f);
+        
+        void changeRatio(Section &section, float w_percent=0.0f);
+        void changeRatio(std::string section, float w_percent=0.0f);
+        void updateMaxPos(int t_w, int t_h);
+        /**
+         Calculates the actual position and dimensions for the object
+         **/
+        virtual void calcTargets(float w_percent, float h_percent, float padding, int &t_x, int &t_y, int &t_w, int &t_h);
+        virtual void clip(int &t_x, int &t_y, int &t_w, int &t_h);
+        virtual void calculatePadding(int &t_x, int &t_y, int &t_w, int &t_h, float p);
+        void setup();
+        void hide(Section &section);
+        void show(Section &section);
+        void hideChild(Section &section);
+        void showChild(Section &section);    };
+};
+#endif /* defined(__signage__column__) */
