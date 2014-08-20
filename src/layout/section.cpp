@@ -7,13 +7,13 @@
 //
 
 #include "section.h" 
-void Kabbou::Section::onPropertyChanged(PropertyEvent &args){
-    
-}
-void Kabbou::Section::setup(){
-    ofAddListener(PropertyEvent::events, this, &Section::onPropertyChanged);
-}
-
-//void Kabbou::Section::onPropertyChanged(PropertyEvent & args){
-    
+//void Kabbou::Section::onPropertyChanged(PropertyEvent &args){
+//    
+//}
+//void Kabbou::Section::setup(){
+////    ofAddListener(PropertyEvent::events, this, &Section::onPropertyChanged);
+//}
+//
+////void Kabbou::Section::onPropertyChanged(PropertyEvent & args){
+//    
 //}

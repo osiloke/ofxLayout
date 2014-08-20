@@ -66,13 +66,14 @@ void ColumnLayout::setup(){
     FluidLayout::setup();
 }
 void ColumnLayout::hide(Section &section){
-    section.width.setValue(0);
+//    section.width.setValue(0);
     FluidLayout::hide(section);
-    organize();
+//    organize();
 }
 void ColumnLayout::show(Section &section){
-    FluidLayout::show(section);
-    organize();
+    FluidLayoutMember _section = members.at(section.key);
+    FluidLayout::show(_section);
+//    organize();
 }
 void ColumnLayout::hideChild(Section &section){
     hide(section);

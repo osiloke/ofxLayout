@@ -31,6 +31,10 @@ namespace Kabbou{
         void hide(Section &section);
         void show(Section &section);
         void hideChild(Section &section);
-        void showChild(Section &section);    };
+        void showChild(Section &section);
+        std::string getType(){
+            return "Column Layout";
+        }
+    };
 };
 #endif /* defined(__signage__column__) */

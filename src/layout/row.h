@@ -59,6 +59,10 @@ namespace Kabbou{
         void showChild(Section &section){
             show(section);
         }
+        
+        std::string getType(){
+            return "Row Layout";
+        }
     };
 };
 #endif /* defined(__signage__row__) */

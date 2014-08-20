@@ -44,6 +44,9 @@ public:
     void showChild(Section &section){
         show(section);
     }
+    std::string getType(){
+        return "Overlay Layout";
+    }
 };
 }
 

@@ -18,7 +18,7 @@
 namespace Kabbou {
     class Section{
     protected:
-        void onPropertyChanged(PropertyEvent & args);
+        void onPropertyChanged(PropertyEvent & args){};
     public:
         
         IntProperty width;
@@ -73,7 +73,11 @@ namespace Kabbou {
         virtual void update(){
         }
         
-        void setup();
+        virtual std::string getType(){
+            return "Unknown Section";
+        }
+        
+        void setup(){};
     
     };
 }

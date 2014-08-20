@@ -62,8 +62,7 @@ void OverlayLayout::update(){
             visible = _next_visible;
             _next_visible = "";
             FluidLayoutMember section = members.at(visible);
-            FluidLayout::show(*section.section);
-            section.show();
+            FluidLayout::show(section);
         }
     }else{
         pass->setProgress(displayableAnimation.val()); 

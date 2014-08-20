@@ -19,9 +19,58 @@
 
 namespace Kabbou{
     
+    class FluidLayoutMember{
+    public:
+        Section * section;
+        int w, h, x, y;
+        float h_p, w_p, r_h_p, r_w_p, p_p, r_p_p;
+        
+        FluidLayoutMember(Section * section, int w, int h, int x, int y, float w_p, float h_p, float p_p)
+        :section(section), w_p(w_p), h_p(h_p), p_p(p_p), r_w_p(w_p), r_h_p(h_p), r_p_p(p_p){
+            updateItem(x, y, w, h);
+        }
+        
+        virtual void draw(){
+            section->draw();
+        }
+        
+        
+        virtual void draw(int x, int y){
+            section->draw(x, y);
+        }
+        
+        virtual void draw(int x, int y, int w, int h){
+            section->draw(x, y, w, h);
+        }
+        
+        void update(){
+            section->update();
+        };
+        
+        void reset(){
+            w_p = r_w_p;
+            h_p = r_h_p;
+            p_p = r_p_p;
+        };
+        
+        void updateItem(int x, int y, int w, int h){
+            this->x = x;
+            this->y = y;
+            this->w = w;
+            this->h = h;
+            section->width.setValue(w);
+            section->height.setValue(h);
+            section->x_pos.setValue(x);
+            section->y_pos.setValue(y);
+        }
+        
+        void show(){
+            section->onShow();
+        }
+    };
     class FluidLayout: public ActionListener, public Section{
-    public: 
-                
+    public:
+        
         int w, h, x, y;
         FluidLayout(std::string key):ActionListener(key),Section(key){
         }
@@ -39,24 +88,33 @@ namespace Kabbou{
             ActionListener::setup();
         }
         
-        void update();
+        virtual void update();
         
-        virtual void draw(){            
+        virtual void draw(){
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
             for ( it = displayable.rbegin(); it != displayable.rend(); it++){
-                
                 FluidLayoutMember section = members.at((*it));
-                section.draw();
+                section.draw(); 
+//                std::map<std::string, FluidLayoutMember>::iterator found;
+//                found = members.find((*it));
+//                if (found != members.end()){
+//                    FluidLayoutMember section = found->second;
+//                    
+//                    section.draw();
+//                }
             }
 
         }
         
         virtual void draw(int x, int y){
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
-            for ( it = displayable.rbegin(); it != displayable.rend(); it++){
-                
-                FluidLayoutMember section = members.at((*it));
-                section.draw(x, y);
+            for ( it = displayable.rbegin(); it != displayable.rend(); it++){                
+                std::map<std::string, FluidLayoutMember>::iterator found;
+                found = members.find((*it));
+                if (found != members.end()){
+                    FluidLayoutMember section = found->second;
+                    section.draw();
+                }
             }
             
         }
@@ -72,7 +130,7 @@ namespace Kabbou{
             this->width.setValue(w);
             this->height.setValue(h);
             setup();            
-            ofLogNotice()<<"Setup "<<key<<" Layout - "<<width.getValue()<<" by "<<height.getValue(); 
+            ofLogNotice()<<"Setup "<<key<<width.getValue()<<" by "<<height.getValue(); 
         }
         
         /**
@@ -107,9 +165,10 @@ namespace Kabbou{
         }
         
         void addLayout(FluidLayout &layout, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f){
-            layout.setup();
             add(layout, w_percent, h_percent, padding);
             layout.resetMaxPosition();
+            layout.setup();
+            layout.organize();
         }
         
         virtual void calculatePadding(int &t_x, int &t_y, int &t_w, int &t_h, float p){
@@ -140,10 +199,12 @@ namespace Kabbou{
             calculatePadding(t_x, t_y, t_w, t_h, padding);
             members.insert(std::pair<std::string, FluidLayoutMember>(section.key, *new FluidLayoutMember(&section, t_w, t_h, t_x, t_y, w_percent, h_percent, padding)));
             
-            it_displayable = displayable.insert(it_displayable++, section.key);
-            member_index.insert(std::pair<std::string, std::vector<std::string>::iterator>(section.key, it_displayable));
+            it_displayable = this->displayable.insert(it_displayable++, section.key);
+            this->member_index.insert(std::pair<std::string, std::vector<std::string>::iterator>(section.key, it_displayable));
             section.parent = this;
             
+            ofLogNotice(this->getType())<<"[Section] "<<section.key<<" added";
+            ofLogNotice(this->getType())<<this->displayable.size()<<" sections are displayable";
         };
         void hide(Section &section){
             std::vector<std::string>::iterator position = std::find(displayable.begin(), displayable.end(), section.key);
@@ -160,10 +221,33 @@ namespace Kabbou{
                 if (position == displayable.end()) // == vector.end() means the element was not found
                 {
                     //Show the section
-                    ofLogNotice()<<"Showing "<<it->first;
+                    ofLogNotice(this->getType())<<"Showing "<<it->first;
                     displayable.insert(it->second, it->first);
+                    
+                    section.onShow();
                 }
             }
+        };
+        
+        void show(FluidLayoutMember &member){
+            //Insert this section in its rightful place in displayable array
+            //This all seems unneccessarily complicated
+            
+            ofLogNotice(this->getType())<<"Before showing "<<member.section->key<<", there are "<<displayable.size()<<" sections";
+            std::map<std::string, std::vector<std::string>::iterator>::iterator it = member_index.find( member.section->key ); //find its index
+            if( it != member_index.end() )
+            {
+                std::vector<std::string>::iterator position = std::find(displayable.begin(), displayable.end(), member.section->key);
+                if (position == displayable.end()) // == vector.end() means the element was not found
+                {
+                    //Show the section
+                    ofLogNotice(this->getType())<<"Showing "<<it->first;
+                    displayable.insert(it->second, it->first);
+                    
+                    member.show();
+                }
+            }
+            ofLogNotice(this->getType())<<"After showing "<<member.section->key<<", there are "<<displayable.size()<<" sections";
         };
         
         void organize(){
@@ -171,6 +255,7 @@ namespace Kabbou{
             resetMaxPosition();
             int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
             
+            ofLogNotice(this->getType())<<displayable.size()<<" sections are displayable and can be organized";
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
             
             for ( it = displayable.rbegin(); it != displayable.rend(); it++){
@@ -212,6 +297,10 @@ namespace Kabbou{
             }
         }
         
+        virtual std::string getType(){
+            return "Fluid Layout";
+        }
+        
     protected:
         virtual void updateMaxPos(int t_w, int t_h){
             int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
@@ -221,55 +310,6 @@ namespace Kabbou{
                 cum_width = cum_width + t_w;
         };
 
-        class FluidLayoutMember{
-        public:
-            Section * section;
-            int w, h, x, y;
-            float h_p, w_p, r_h_p, r_w_p, p_p, r_p_p;
-            
-            FluidLayoutMember(Section * section, int w, int h, int x, int y, float w_p, float h_p, float p_p)
-            :section(section), w_p(w_p), h_p(h_p), p_p(p_p), r_w_p(w_p), r_h_p(h_p), r_p_p(p_p){
-                updateItem(x, y, w, h);
-            }
-            
-            virtual void draw(){
-                section->draw();
-            }
-            
-            
-            virtual void draw(int x, int y){
-                section->draw(x, y);
-            }
-            
-            virtual void draw(int x, int y, int w, int h){
-                section->draw(x, y, w, h);
-            }
-            
-            virtual void update(){
-                section->update();
-            }
-            
-            void reset(){
-                w_p = r_w_p;
-                h_p = r_h_p;
-                p_p = r_p_p;
-            };
-            
-            void updateItem(int x, int y, int w, int h){
-                this->x = x;
-                this->y = y;
-                this->w = w;
-                this->h = h;
-                section->width.setValue(w);
-                section->height.setValue(h);
-                section->x_pos.setValue(x);
-                section->y_pos.setValue(y);
-            }
-            
-            void show(){
-                section->onShow();
-            }
-        };
         virtual void hideChild(Section &section){
             hide(section);
         }

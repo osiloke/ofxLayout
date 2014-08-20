@@ -11,7 +11,7 @@
 
 using namespace Kabbou;
 void FluidLayout::processAction(ActionEvent &e){
-    ofLogNotice("Layout") << e.message;
+    ofLogNotice(this->getType()) << e.message;
 };
 
 void FluidLayout::update(){
