@@ -72,6 +72,7 @@ namespace Kabbou{
     public:
         
         int w, h, x, y;
+        typedef shared_ptr<FluidLayout> Ptr;
         FluidLayout(std::string key):ActionListener(key),Section(key){
         }
         
@@ -88,19 +89,25 @@ namespace Kabbou{
             ActionListener::setup();
         }
         
-        virtual void update();
+        virtual void update(){
+            std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
+            for ( it = displayable.rbegin(); it != this->displayable.rend(); it++){
+                FluidLayoutMember section = this->members.at((*it));
+                section.update();
+            };
+        };
         
         virtual void draw(){
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
             for ( it = displayable.rbegin(); it != displayable.rend(); it++){
                 FluidLayoutMember section = members.at((*it));
-                section.draw(); 
+                section.draw();
 //                std::map<std::string, FluidLayoutMember>::iterator found;
 //                found = members.find((*it));
 //                if (found != members.end()){
 //                    FluidLayoutMember section = found->second;
 //                    
-//                    section.draw();
+//                    section->draw();
 //                }
             }
 
@@ -197,7 +204,9 @@ namespace Kabbou{
             updateMaxPos(t_w, t_h);
             
             calculatePadding(t_x, t_y, t_w, t_h, padding);
-            members.insert(std::pair<std::string, FluidLayoutMember>(section.key, *new FluidLayoutMember(&section, t_w, t_h, t_x, t_y, w_percent, h_percent, padding)));
+            
+            FluidLayoutMember n_section = *new FluidLayoutMember(&section, t_w, t_h, t_x, t_y, w_percent, h_percent, padding);
+            members.insert(std::pair<std::string, FluidLayoutMember>(section.key, n_section));
             
             it_displayable = this->displayable.insert(it_displayable++, section.key);
             this->member_index.insert(std::pair<std::string, std::vector<std::string>::iterator>(section.key, it_displayable));
@@ -269,7 +278,7 @@ namespace Kabbou{
                 
 //                if (it+1 == displayable.rend()){
 //                    //Maximize item since its the last item. Dont leave any space
-//                    section.updateItem(t_x, t_y, t_w + ((w + x) - cum_width), t_h + ((h + y) - cum_height));
+//                    section->updateItem(t_x, t_y, t_w + ((w + x) - cum_width), t_h + ((h + y) - cum_height));
 //                }else{
                     section.updateItem(t_x, t_y, t_w, t_h);
 //                }

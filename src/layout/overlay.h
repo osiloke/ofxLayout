@@ -28,9 +28,9 @@ private:
     ofxAnimatableFloat displayableAnimation;
     void finishedAnimating();
 public:
-    OverlayLayout(): FluidLayout("overlay"),
-    visible(""),
-    _next_visible(""){};
+    typedef shared_ptr<OverlayLayout> Ptr;
+    OverlayLayout(std::string key): FluidLayout(key), visible(""), _next_visible(""){};
+    OverlayLayout(): FluidLayout("overlay"), visible(""), _next_visible(""){};
     void draw();
     void update();
     void setup();

@@ -14,6 +14,8 @@
 namespace Kabbou{
     class RowLayout:public FluidLayout{
     public:
+        typedef shared_ptr<RowLayout> Ptr;
+        RowLayout(std::string key): FluidLayout(key){};
         RowLayout(): FluidLayout("row"){};
         
         void add(Kabbou::Section &section, float h_percent=1.0f){

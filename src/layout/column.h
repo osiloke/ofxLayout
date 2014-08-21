@@ -14,6 +14,8 @@
 namespace Kabbou{
     class ColumnLayout:public FluidLayout{
     public:
+        typedef shared_ptr<ColumnLayout> Ptr;
+        ColumnLayout(std::string key): FluidLayout(key){};
         ColumnLayout(): FluidLayout("column"){};
         
         void add(Kabbou::Section &section, float w_percent=1.0f, float padding=0.0f);
