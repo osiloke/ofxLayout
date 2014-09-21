@@ -9,11 +9,11 @@
 #include "effects.h"
 
 PopupBlur::PopupBlur(const ofVec2f& aspect,
-                                     bool arb,
-                                     float radialScale,
-                                     float brightness,
-                                     const ofVec3f & startColor,
-                                     const ofVec3f & endColor) :
+                        bool arb,
+                        float radialScale,
+                        float brightness,
+                        const ofVec3f & startColor,
+                        const ofVec3f & endColor) :
 radialScale(radialScale), brightness(brightness), startColor(startColor), endColor(endColor), RenderPass(aspect, arb, "popupblur")
 {
     
@@ -75,14 +75,15 @@ void PopupBlur::render(ofFbo& readFbo, ofFbo& writeFbo)
 FadeBlack::FadeBlack(const ofVec2f& aspect,
                      bool arb,
                      float prog,
-                     const ofVec3f & endColor) :
-endColor(endColor), progress(prog), RenderPass(aspect, arb, "fadeblack")
+                     const ofVec3f & endColor,
+                     const ofVec2f& resolution) :
+endColor(endColor), resolution(resolution), progress(prog), RenderPass(aspect, arb, "fadeblack")
 {
     
     string fragShaderSrc = STRINGIFY(
      uniform sampler2D tex0; 
-                                     uniform vec3 endColor;
-                                     uniform vec2 resolution;
+     uniform vec3 endColor;
+     uniform vec2 resolution;
      uniform float colorPhase; // if 0.0, there is no black phase, if 0.9, the black phase is very important
                                      
      uniform float progress;
@@ -94,7 +95,7 @@ endColor(endColor), progress(prog), RenderPass(aspect, arb, "fadeblack")
      const float SOFTNESS = 0.45;
                                      
      void main() {
-         vec2 pos = gl_TexCoord[0].st;
+         vec2 pos = gl_TexCoord[0].st;//resolution.xy;
          vec2 vUv = vec2(pos.x, 1.0-pos.y); 
          
          float len = length(vUv - vec2(0.8)) * progress;
@@ -118,7 +119,7 @@ void FadeBlack::render(ofFbo& readFbo, ofFbo& writeFbo)
     shader.setUniform3f("endColor", 0, 0, 0); 
     shader.setUniform1f("colorPhase", 0.4f);
     shader.setUniform1f("progress", progress);
-    shader.setUniform2f("resolution", readFbo.getWidth(), readFbo.getHeight());
+    shader.setUniform2f("resolution", resolution.x, resolution.y);
     
     texturedQuad(0, 0, writeFbo.getWidth(), writeFbo.getHeight());
     

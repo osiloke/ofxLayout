@@ -189,6 +189,9 @@ namespace Kabbou{
             t_x = t_x + w_p;
             t_y = t_y + h_p;
         }
+        virtual void add(Section &section, ofxJSONElement props){
+            
+        }
         
         virtual void add(Section &section, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f){
             /*
@@ -238,6 +241,10 @@ namespace Kabbou{
             }
         };
         
+        virtual void focus(Section &section){
+            
+        }
+        
         void show(FluidLayoutMember &member){
             //Insert this section in its rightful place in displayable array
             //This all seems unneccessarily complicated
@@ -259,7 +266,7 @@ namespace Kabbou{
             ofLogNotice(this->getType())<<"After showing "<<member.section->key<<", there are "<<displayable.size()<<" sections";
         };
         
-        void organize(){
+        virtual void organize(){
             //Re calculate placement for each item
             resetMaxPosition();
             int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
@@ -282,6 +289,8 @@ namespace Kabbou{
 //                }else{
                     section.updateItem(t_x, t_y, t_w, t_h);
 //                }
+                
+                section.section->organize();
             }
         }
         
@@ -326,6 +335,11 @@ namespace Kabbou{
         virtual void showChild(Section &section){
             show(section);
         }
+        
+        virtual void focusChild(Section &section){
+            focus(section);
+        }
+        
         int  cum_width, cum_height;
         std::map<std::string, FluidLayoutMember> members;
         std::vector<std::string> displayable; //stores displayable sections, it is ordered by the position of sections in the members map;

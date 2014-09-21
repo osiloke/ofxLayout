@@ -53,12 +53,15 @@ public:
     FadeBlack(const ofVec2f& aspect,
               bool arb,
               float progress = 0.65f,
-              const ofVec3f & endColor = ofVec3f(1.0,1.0,1.0));
+              const ofVec3f & endColor = ofVec3f(1.0,1.0,1.0), const ofVec2f& resolution = ofVec2f(100.f, 100.f));
     
     void render(ofFbo& readFbo, ofFbo& writeFbo);   
     
     void setEndColor(const ofVec3f & val) { endColor = val; }
     const ofVec3f getEndColor() { return endColor; }
+    
+    void setResolution(const ofVec2f & val) { resolution = val; }
+    const ofVec2f getResolution() { return resolution; }
     
     void setColorPhase(float val) { colorPhase = val; }
     float getColorPhase() { return colorPhase; }
@@ -70,6 +73,7 @@ private:
     ofShader shader;
     ofVec3f startColor;
     ofVec3f endColor;
+    ofVec2f resolution;
     float colorPhase;
     float progress;
 };

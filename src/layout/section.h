@@ -18,6 +18,7 @@
 namespace Kabbou {
     class Section{
     protected:
+        ofxJSONElement data;
         void onPropertyChanged(PropertyEvent & args){};
     public:
         
@@ -40,8 +41,18 @@ namespace Kabbou {
             
         }
         
+        virtual void focusChild(Section &section){
+            
+        }
+        
+        virtual void deFocusChild(Section &section){
+            
+        }
+        
         virtual void onShow(){};
         virtual void onHide(){};
+        virtual void onFocus(){};
+        virtual void onDeFocus(){};
         
         void conceal(){
             if(this->parent)
@@ -50,6 +61,16 @@ namespace Kabbou {
         void reveal(){
             if(this->parent)
                 this->parent->showChild(*this);
+        }
+        
+        void focus(){
+            if(this->parent)
+                this->parent->focusChild(*this);
+        }
+        
+        void deFocus(){
+            if(this->parent)
+                this->parent->deFocusChild(*this);
         }
         
         Section(){};
@@ -72,6 +93,8 @@ namespace Kabbou {
         };
         virtual void update(){
         }
+        
+        virtual void organize(){};
         
         virtual std::string getType(){
             return "Unknown Section";

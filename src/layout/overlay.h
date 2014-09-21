@@ -35,15 +35,12 @@ public:
     void update();
     void setup();
     void add(Section &section, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f);
-    void show(Section &section);
-    void hide(Section &section);
-    void hideChild(Section &section){
-        hide(section);
-    }
-    
-    void showChild(Section &section){
-        show(section);
-    }
+    void add(Section &section, ofxJSONElement props);
+//    void show(Section &section);
+    void hideChild(Section &section);
+    void focusChild(Section &section);
+    void deFocusChild(Section &section);
+    void organize();
     std::string getType(){
         return "Overlay Layout";
     }

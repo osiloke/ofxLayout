@@ -18,7 +18,7 @@
 class LayoutFactory{
 private:
     std::map<std::string, FluidLayout::Ptr> m_layouts;
-    vector<FluidLayout::Ptr> playlists;
+    vector<FluidLayout::Ptr> layouts;
 public:
     LayoutFactory(){
         
@@ -38,6 +38,7 @@ public:
     {
         shared_ptr<T> layout = shared_ptr<T>(new T(name));
         m_layouts.insert(std::pair<std::string, FluidLayout::Ptr>(name, layout));
+        layouts.push_back(layout);
         return layout;
     }
     
@@ -58,6 +59,8 @@ public:
         }
 
     }
+    
+    vector<FluidLayout::Ptr>& getLayouts() { return layouts; }
     
     typedef shared_ptr<FluidLayout> Ptr;
 };

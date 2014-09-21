@@ -12,7 +12,7 @@
 using namespace Kabbou;
 
 FadeBlack::Ptr pass;
-float target_p = 0.65f;
+float target_p = 10.0f;
 
 void OverlayLayout::setup(){
     FluidLayout::setup();
@@ -22,6 +22,7 @@ void OverlayLayout::setup(){
     post.init(w, h);
     pass = post.createPass<FadeBlack>();
     pass->setProgress(target_p);
+    pass->setResolution(ofVec2f(w, h));
     pass->setEnabled(true);
     
 }
@@ -34,20 +35,25 @@ void OverlayLayout::draw(){
     // copy enable part of gl state
     glPushAttrib(GL_ENABLE_BIT);
     
-    post.begin();
-    for ( it = displayable.rbegin(); it != displayable.rend(); it++){
-        if(*it != visible)
-        {
-            FluidLayoutMember section = members.at((*it));
-            section.draw(section.x, section.y, section.w, section.h);
+    if(visible != ""){
+        post.begin();
+        for ( it = displayable.rbegin(); it != displayable.rend(); it++){
+            if(*it != visible)
+            {
+                FluidLayoutMember section = members.at((*it));
+                section.draw(section.x, section.y, section.w, section.h);
+            } 
         }
-    }
-    post.end();
-    
-    //Draw only visible item
-    if (visible != ""){
+        post.end();
+        
         FluidLayoutMember section = members.at((visible));
         section.draw();
+        
+    }else{
+        for ( it = displayable.rbegin(); it != displayable.rend(); it++){ 
+                FluidLayoutMember section = members.at((*it));
+                section.draw(section.x, section.y, section.w, section.h);
+            } 
     }
     
 }
@@ -69,23 +75,53 @@ void OverlayLayout::update(){
     }
 }
 
+void OverlayLayout::add(Section &section, ofxJSONElement props){
+    std::string halign = props.get("halign", "left").asString();
+    std::string valign = props.get("valign", "bottom").asString();
+    
+    float w_percent = atof(props.get("width", "1.0").asString().c_str());
+    float h_percent = atof(props.get("height", "1.0").asString().c_str());
+    float padding = atof(props.get("padding", "0.0").asString().c_str());
+    
+    if(halign == "center"){
+        padding = padding + 1.0f - w_percent;
+    }
+    
+    FluidLayout::add(section, w_percent, h_percent, padding);
+}
 void OverlayLayout::add(Section &section, float w_percent, float h_percent, float padding){
-    FluidLayout::add(section, w_percent, h_percent, padding); 
+    FluidLayout::add(section, w_percent, h_percent, padding);
 //    visible = section.key;
 }
 
-void OverlayLayout::show(Section &section){
+void OverlayLayout::focusChild(Section &section){
     _next_visible = section.key;
     //Do fade animation
     displayableAnimation.animateFromTo(0.0f, target_p);
     
 }
 
+void OverlayLayout::deFocusChild(Section &section){
+    _next_visible = "";
+    //Do fade animation
+    displayableAnimation.animateFromTo(target_p, 0.0f);
+    
+}
 
-void OverlayLayout::hide(Section &section){
+
+void OverlayLayout::hideChild(Section &section){
     FluidLayout::hide(section);
     visible = "";
     _next_visible = "";
     displayableAnimation.animateFromTo(target_p, 0.0f);
+}
+
+void OverlayLayout::organize(){
+    FluidLayout::organize();
+    int x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt(),
+    w = width.getValue().asInt(),h = height.getValue().asInt();
+    
+    post.init(w, h); 
+    
 }
 
