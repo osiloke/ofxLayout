@@ -14,11 +14,11 @@
 #include "ofxPostProcessing.h"
 #include "effects.h"
 #include "ofxAnimatableFloat.h"
-
+#include "sectionFactory.h"
 
 namespace Kabbou{
 class OverlayLayout:public FluidLayout{
-private:
+REGISTER_SECTION(OverlayLayout);
     std::string visible;
     std::string _next_visible;
     ofFbo visibleFbo;
@@ -29,6 +29,7 @@ private:
     void finishedAnimating();
 public:
     typedef shared_ptr<OverlayLayout> Ptr;
+    OverlayLayout(std::string key, Json::Value data): FluidLayout(key, data), visible(""), _next_visible(""){};
     OverlayLayout(std::string key): FluidLayout(key), visible(""), _next_visible(""){};
     OverlayLayout(): FluidLayout("overlay"), visible(""), _next_visible(""){};
     void draw();

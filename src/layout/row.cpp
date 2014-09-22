@@ -7,3 +7,4 @@
 //
 
 #include "row.h"
+REGISTERSECTIONIMPL(RowLayout);

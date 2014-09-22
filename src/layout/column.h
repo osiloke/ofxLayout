@@ -11,10 +11,14 @@
 #define __signage__column__
 #include "layout.h"
 #include <iostream>
+#include "sectionFactory.h"
+
 namespace Kabbou{
     class ColumnLayout:public FluidLayout{
+        REGISTER_SECTION(ColumnLayout);
     public:
         typedef shared_ptr<ColumnLayout> Ptr;
+        ColumnLayout(std::string key, Json::Value data): FluidLayout(key, data){};
         ColumnLayout(std::string key): FluidLayout(key){};
         ColumnLayout(): FluidLayout("column"){};
         

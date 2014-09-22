@@ -1,0 +1,20 @@
+{
+  "FluidLayout": {
+    "key": "Root Layout",
+    "width": "Window",
+    "height": "Window",
+    "children": {
+      "OverlayLayout": {
+        "key": "main_wrapper",
+        "children": {
+          "FluidLayout": {
+            "key": "tv_stream",
+            "width": 1.0,
+            "height": 1.0
+            
+          }
+        }
+      }
+    }
+  }
+}

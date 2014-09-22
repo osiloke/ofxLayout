@@ -10,7 +10,7 @@
 
 
 using namespace Kabbou;
-
+REGISTERSECTIONIMPL(OverlayLayout);
 FadeBlack::Ptr pass;
 float target_p = 10.0f;
 

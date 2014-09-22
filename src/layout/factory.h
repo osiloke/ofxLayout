@@ -44,7 +44,11 @@ public:
     
     
     FluidLayout::Ptr create(std::string name, std::string type){
-        if (type == "overlay"){
+        if (type == "root"){
+            FluidLayout::Ptr layout = createLayout<FluidLayout>(name);
+            return layout;
+        }
+        else if (type == "overlay"){
             FluidLayout::Ptr layout = createLayout<OverlayLayout>(name);
             return layout;
         }else if(type == "row"){

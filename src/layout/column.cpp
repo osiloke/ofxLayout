@@ -8,6 +8,7 @@
 
 #include "column.h"
 
+REGISTERSECTIONIMPL(ColumnLayout);
 
 void ColumnLayout::add(Kabbou::Section &section, float w_percent, float padding){
     FluidLayout::add(section, w_percent, 1.0f, padding);

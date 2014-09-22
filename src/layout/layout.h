@@ -16,6 +16,7 @@
 #include "section.h"
 #include "actionListener.h"
 #include "propertyEvent.h"
+#include "sectionFactory.h"
 
 namespace Kabbou{
     
@@ -69,11 +70,15 @@ namespace Kabbou{
         }
     };
     class FluidLayout: public ActionListener, public Section{
+    private:
+        static const SectionCreatorImpl<FluidLayout> creator;
     public:
         
         int w, h, x, y;
         typedef shared_ptr<FluidLayout> Ptr;
         FluidLayout(std::string key):ActionListener(key),Section(key){
+        }
+        FluidLayout(std::string key, Json::Value data):ActionListener(key),Section(key, data){
         }
         
         FluidLayout(): ActionListener("layout"), Section("layout"){
@@ -171,6 +176,21 @@ namespace Kabbou{
                 t_x = 0;
         }
         
+        virtual void addChild(Section::Ptr section){
+            /**
+             Add a child section/layout
+             **/
+            add(*section);
+            onAttachedToParent();
+        }
+        void onAttachedToParent(){
+            /**
+             Gets called immediately after a layout has been attachd to a parent
+             **/
+            resetMaxPosition();
+            setup();
+            organize();
+        }
         void addLayout(FluidLayout &layout, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f){
             add(layout, w_percent, h_percent, padding);
             layout.resetMaxPosition();

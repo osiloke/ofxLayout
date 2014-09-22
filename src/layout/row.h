@@ -10,12 +10,15 @@
 #define __signage__row__
 #include "layout.h"
 #include <iostream>
+#include "sectionFactory.h"
 
 namespace Kabbou{
     class RowLayout:public FluidLayout{
+        REGISTER_SECTION(RowLayout);
     public:
         typedef shared_ptr<RowLayout> Ptr;
-        RowLayout(std::string key): FluidLayout(key){};
+        RowLayout(std::string key, Json::Value data): FluidLayout(key, data){};
+        RowLayout(std::string key): FluidLayout(key){}; 
         RowLayout(): FluidLayout("row"){};
         
         void add(Kabbou::Section &section, float h_percent=1.0f){
