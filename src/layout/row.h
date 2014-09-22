@@ -21,6 +21,15 @@ namespace Kabbou{
         RowLayout(std::string key): FluidLayout(key){}; 
         RowLayout(): FluidLayout("row"){};
         
+        void addChild(Section::Ptr section){
+            /**
+             Add a child section/layout
+             **/
+            Json::Value props = section->getData();
+            this->add(*section, props.get("h_percent", 1.0f).asFloat());
+            section->onAttachedToParent();
+        }
+        
         void add(Kabbou::Section &section, float h_percent=1.0f){
             FluidLayout::add(section, 1.0f, h_percent);
         }

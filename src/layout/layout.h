@@ -180,8 +180,11 @@ namespace Kabbou{
             /**
              Add a child section/layout
              **/
-            add(*section);
-            onAttachedToParent();
+            Json::Value props = section->getData();
+            add(*section, props.get("w_percent", 1.0f).asFloat(),
+                props.get("h_percent", 1.0f).asFloat(),
+                props.get("padding", 0.0f).asFloat()); 
+            section->onAttachedToParent();
         }
         void onAttachedToParent(){
             /**
@@ -221,7 +224,7 @@ namespace Kabbou{
              cum_height = 0
              cum_height = h - (h - cum_height - (t_h))
              */
-            int t_x = cum_width, t_y = cum_height, t_w, t_h;
+            int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
             
             calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
             updateMaxPos(t_w, t_h);
@@ -235,8 +238,8 @@ namespace Kabbou{
             this->member_index.insert(std::pair<std::string, std::vector<std::string>::iterator>(section.key, it_displayable));
             section.parent = this;
             
-            ofLogNotice(this->getType())<<"[Section] "<<section.key<<" added";
-            ofLogNotice(this->getType())<<this->displayable.size()<<" sections are displayable";
+            ofLogVerbose(this->getType())<<"[Section] "<<section.key<<" added";
+            ofLogVerbose(this->getType())<<this->displayable.size()<<" sections are displayable";
         };
         void hide(Section &section){
             std::vector<std::string>::iterator position = std::find(displayable.begin(), displayable.end(), section.key);
@@ -253,7 +256,7 @@ namespace Kabbou{
                 if (position == displayable.end()) // == vector.end() means the element was not found
                 {
                     //Show the section
-                    ofLogNotice(this->getType())<<"Showing "<<it->first;
+                    ofLogVerbose(this->getType())<<"Showing "<<it->first;
                     displayable.insert(it->second, it->first);
                     
                     section.onShow();
@@ -277,7 +280,7 @@ namespace Kabbou{
                 if (position == displayable.end()) // == vector.end() means the element was not found
                 {
                     //Show the section
-                    ofLogNotice(this->getType())<<"Showing "<<it->first;
+                    ofLogVerbose(this->getType())<<"Showing "<<it->first;
                     displayable.insert(it->second, it->first);
                     
                     member.show();

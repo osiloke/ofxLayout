@@ -11,13 +11,12 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    SectionFactory::getSection("root")->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-}
+    SectionFactory::getSection("root")->draw(); }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

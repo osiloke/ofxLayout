@@ -18,34 +18,56 @@ private:
                 
                 Section::Ptr rootLayout = SectionFactory::create(key, root["key"].asString(), root);
                 
+                std::string s_width = root.get("width", "").asString();
+                std::string s_height = root.get("height", "").asString();
+                
+                int width = 0, height =0;
+                if (s_width.find("Window")!=std::string::npos)
+                {
+                    width = ofGetWidth();
+                }else{
+                    width = atoi(s_width.c_str());
+                }
+                
+                if (s_height.find("Window")!=std::string::npos)
+                {
+                    height = ofGetHeight();
+                }else{
+                    height = atoi(s_height.c_str());
+                }
+                
+                rootLayout->setup(0, 0, width, height);
+                
                 ofLogVerbose()<<"Created "<<key<<" ["<<rootLayout->key<<"]";
                 
-                if (!children.isNull()){
+                if (!children.isNull() && children.size() > 0){
                     computeChildren(children, rootLayout);
                 }
                 
             }
     }
     void  computeChildren(ofxJSONElement children, Section::Ptr parentLayout){
-        int i = 0;
-        for( Json::ValueIterator itr = children.begin() ; itr != children.end() ; itr++ ){
-            std::string key = itr.key().asString();
-            Json::Value root = children[key];
-            ostringstream ss;
-            ss << key << "_"<<i;
-            
-            Json::Value children = root.removeMember("children");
-            Section::Ptr rootLayout = SectionFactory::create(key, root["key"].asString(), root);
-            
-            parentLayout->addChild(rootLayout);
-            
-            ofLogVerbose()<<"Created "<<key<<" ["<<rootLayout->key<<"]";
-            rootLayout->printData();
-            if (!children.isNull()){
-                computeChildren(children, rootLayout);
-            } 
-            i++;
-            
+        for(int i = 0; i < children.size(); i++)
+        {
+            Json::Value child = children[i];
+            for( Json::ValueIterator itr = child.begin() ; itr != child.end() ; itr++ ){
+                std::string key = itr.key().asString();
+                Json::Value root = child[key];
+                ostringstream ss;
+                ss << key << "_"<<i;
+                
+                Json::Value nextChildren = root.removeMember("children");
+                Section::Ptr rootLayout = SectionFactory::create(key, root["key"].asString(), root);
+                
+                parentLayout->addChild(rootLayout);
+                
+                ofLogVerbose()<<"Created "<<key<<" ["<<rootLayout->key<<"]";
+                
+                if (!nextChildren.isNull() && nextChildren.size() > 0){
+                    computeChildren(nextChildren, rootLayout);
+                } 
+                
+            }
         }
     }
 public:

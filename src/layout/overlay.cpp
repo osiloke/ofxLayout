@@ -74,15 +74,26 @@ void OverlayLayout::update(){
         pass->setProgress(displayableAnimation.val()); 
     }
 }
-
+void OverlayLayout::addChild(Section::Ptr section){
+    /**
+     Add a child section/layout
+     **/
+    Json::Value props = section->getData();
+    this->add(*section, props);
+    section->onAttachedToParent();
+}
 void OverlayLayout::add(Section &section, ofxJSONElement props){
     std::string halign = props.get("halign", "left").asString();
     std::string valign = props.get("valign", "bottom").asString();
     
-    float w_percent = atof(props.get("width", "1.0").asString().c_str());
-    float h_percent = atof(props.get("height", "1.0").asString().c_str());
+    float w_percent = atof(props.get("w_percent", "1.0").asString().c_str());
+    float h_percent = atof(props.get("h_percent", "1.0").asString().c_str());
     float padding = atof(props.get("padding", "0.0").asString().c_str());
+    std::string visible = props.get("visible", "no").asString();
     
+    if (visible == "yes"){
+        visible = section.key;
+    }
     if(halign == "center"){
         padding = padding + 1.0f - w_percent;
     }

@@ -94,6 +94,8 @@ namespace Kabbou {
             this->data = data;
         }
         
+        Json::Value getData(){ return data;}
+        
         void printData(){
             ofLogNotice()<< this->data.toStyledString();
         }
@@ -115,7 +117,9 @@ namespace Kabbou {
         width(key + ".width"),
         height(key + ".height"),
         b_displayed(key + ".displayed", false),
-        data(data){}
+        data(data){
+        
+        }
         virtual void setKey(std::string key){
             this->key = key;
             this->x_pos.key = key + ".x";
@@ -125,12 +129,13 @@ namespace Kabbou {
             this->b_displayed = key + ".displayed";
         }
         
-        virtual void draw() = 0;
-        virtual void draw(int x, int y){
-            draw();
+        virtual void draw(){ 
         };
-        virtual void draw(int x, int y, int w, int h){
-            draw();
+        virtual void draw(int x, int y){  
+        
+        };
+        virtual void draw(int x, int y, int w, int h){ 
+            
         };
         virtual void update(){
         }
@@ -141,7 +146,8 @@ namespace Kabbou {
             return "Unknown Section";
         }
         
-        void setup(){};
+        virtual void setup(){};
+        virtual void setup(int x, int y, int w, int h){}
     
     };
 }
