@@ -24,7 +24,6 @@
 		3C6F3DEF19D0B9BB002AA367 /* mediaSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F3DED19D0B9BB002AA367 /* mediaSection.cpp */; };
 		4355FD81C3F9DDE40B10CE94 /* SSAOPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C127DCF305861E6D5D6332E6 /* SSAOPass.cpp */; };
 		4A2B684DF41F7779B2947319 /* RimHighlightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74BDDD14F49833AD24862E87 /* RimHighlightingPass.cpp */; };
-		50C91BD24365E6EAA376F7B2 /* actionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE5A3CFAE5F41471F468089 /* actionEvent.cpp */; };
 		52C77060FBB9307AEFDAE8C6 /* ofxAnimatable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CFEE77982205D3F1496C03 /* ofxAnimatable.cpp */; };
 		5D067CF087427621DD1E64B8 /* ofxAnimatableFloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C9E4AC6CF4626BA74F7E994 /* ofxAnimatableFloat.cpp */; };
 		679B2C165341D2BFA18D0F1E /* column.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439613F70EC4BEA7AB79F5FD /* column.cpp */; };
@@ -49,7 +48,6 @@
 		BE5ED1FDB18D5092CF3AACA0 /* PostProcessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 484F662699DFE8176E1B750F /* PostProcessing.cpp */; };
 		C120AB1D289EB2FC770B5ACC /* percentProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7478BFFC17B79892C6832072 /* percentProperty.cpp */; };
 		C2DB9F6B29F3040F9AA4CD4D /* stringProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3557E165C80CCB8EAF7AA57B /* stringProperty.cpp */; };
-		CCE3DFC9EFA410B15C841DB9 /* actionListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E79689BE4003AFA2999ED486 /* actionListener.cpp */; };
 		CF4A44F97F1C97305F34D79C /* boolProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A784AECFC67261D7F8065CD1 /* boolProperty.cpp */; };
 		D752EB8BA905C25F5E7F2B30 /* ZoomBlurPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF8D27B3DEDC121DE85F5B7B /* ZoomBlurPass.cpp */; };
 		DB5F7FB412E3B8048B7B6CB7 /* propertyValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B8688E44E42F552F4224A3D /* propertyValue.cpp */; };
@@ -73,7 +71,6 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		ED1DD4742C18B254E00FC85F /* actionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E89C9D048AB651B0B0B0F0E /* actionHandler.cpp */; };
 		F57C303C7D9FDDAC73C9879A /* overlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1A9FCE552D4C52C8EED10 /* overlay.cpp */; };
 		FF237FFA5FB87B1AA2963E51 /* intProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F51C0614201E0DE3E77D53A /* intProperty.cpp */; };
 /* End PBXBuildFile section */
@@ -150,7 +147,6 @@
 		3C6F3DEB19D0B2CB002AA367 /* customSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customSection.h; sourceTree = "<group>"; };
 		3C6F3DED19D0B9BB002AA367 /* mediaSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mediaSection.cpp; sourceTree = "<group>"; };
 		3C6F3DEE19D0B9BB002AA367 /* mediaSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mediaSection.h; sourceTree = "<group>"; };
-		3E89C9D048AB651B0B0B0F0E /* actionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = actionHandler.cpp; path = ../../../addons/ofxAction/src/actionHandler.cpp; sourceTree = SOURCE_ROOT; };
 		439613F70EC4BEA7AB79F5FD /* column.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = column.cpp; path = ../../../addons/ofxLayout/src/layout/column.cpp; sourceTree = SOURCE_ROOT; };
 		484F662699DFE8176E1B750F /* PostProcessing.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PostProcessing.cpp; path = ../../../addons/ofxPostProcessing/src/PostProcessing.cpp; sourceTree = SOURCE_ROOT; };
 		48E4AC9F455A87F0448C70B2 /* ofxPostProcessing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPostProcessing.h; path = ../../../addons/ofxPostProcessing/src/ofxPostProcessing.h; sourceTree = SOURCE_ROOT; };
@@ -161,7 +157,6 @@
 		5201F6A7A19258B7F1CA2E43 /* RGBShiftPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = RGBShiftPass.cpp; path = ../../../addons/ofxPostProcessing/src/RGBShiftPass.cpp; sourceTree = SOURCE_ROOT; };
 		54F36382628E4D0FF07206D7 /* RenderPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = RenderPass.cpp; path = ../../../addons/ofxPostProcessing/src/RenderPass.cpp; sourceTree = SOURCE_ROOT; };
 		562FDD97F2B2517640E746BC /* boolProperty.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = boolProperty.h; path = ../../../addons/ofxObservableProperty/src/boolProperty.h; sourceTree = SOURCE_ROOT; };
-		564EB7E51C4D1CD2AE721450 /* actionEvent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = actionEvent.h; path = ../../../addons/ofxAction/src/actionEvent.h; sourceTree = SOURCE_ROOT; };
 		5A6936A5770BEB310F3826AD /* ofxAnimatableOfColor.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAnimatableOfColor.h; path = ../../../addons/ofxAnimatable/src/ofxAnimatableOfColor.h; sourceTree = SOURCE_ROOT; };
 		5BC56A60E911F7488A58830A /* NoiseWarpPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = NoiseWarpPass.cpp; path = ../../../addons/ofxPostProcessing/src/NoiseWarpPass.cpp; sourceTree = SOURCE_ROOT; };
 		5BDCD34C884444C94A7E098D /* percentProperty.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = percentProperty.h; path = ../../../addons/ofxObservableProperty/src/percentProperty.h; sourceTree = SOURCE_ROOT; };
@@ -186,12 +181,10 @@
 		9AACF31BAE533E8F81AD4043 /* LUTPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = LUTPass.h; path = ../../../addons/ofxPostProcessing/src/LUTPass.h; sourceTree = SOURCE_ROOT; };
 		A778E5303A1A5728E0385507 /* row.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = row.h; path = ../../../addons/ofxLayout/src/layout/row.h; sourceTree = SOURCE_ROOT; };
 		A784AECFC67261D7F8065CD1 /* boolProperty.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = boolProperty.cpp; path = ../../../addons/ofxObservableProperty/src/boolProperty.cpp; sourceTree = SOURCE_ROOT; };
-		AA4DFB142CC3FF89B21F4FC0 /* actionListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = actionListener.h; path = ../../../addons/ofxAction/src/actionListener.h; sourceTree = SOURCE_ROOT; };
 		B2F3289AB405C5BB496FC247 /* PixelatePass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PixelatePass.h; path = ../../../addons/ofxPostProcessing/src/PixelatePass.h; sourceTree = SOURCE_ROOT; };
 		B338E8A4A97271700E84EF92 /* propertyEvent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = propertyEvent.cpp; path = ../../../addons/ofxObservableProperty/src/propertyEvent.cpp; sourceTree = SOURCE_ROOT; };
 		B5CEF0B83529626C7E8410B7 /* BloomPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = BloomPass.h; path = ../../../addons/ofxPostProcessing/src/BloomPass.h; sourceTree = SOURCE_ROOT; };
 		BAA4E229C246D7B615917505 /* ZoomBlurPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ZoomBlurPass.h; path = ../../../addons/ofxPostProcessing/src/ZoomBlurPass.h; sourceTree = SOURCE_ROOT; };
-		BAF3772BC082253909C54221 /* actionHandler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = actionHandler.h; path = ../../../addons/ofxAction/src/actionHandler.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C07AAE715D8853EDA76BC909 /* GodRaysPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = GodRaysPass.cpp; path = ../../../addons/ofxPostProcessing/src/GodRaysPass.cpp; sourceTree = SOURCE_ROOT; };
 		C127DCF305861E6D5D6332E6 /* SSAOPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SSAOPass.cpp; path = ../../../addons/ofxPostProcessing/src/SSAOPass.cpp; sourceTree = SOURCE_ROOT; };
@@ -199,7 +192,6 @@
 		C64B88209AF231B4FC8B4056 /* FakeSSSPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FakeSSSPass.cpp; path = ../../../addons/ofxPostProcessing/src/FakeSSSPass.cpp; sourceTree = SOURCE_ROOT; };
 		C69CBE4E4FA9530657A6CD23 /* FakeSSSPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FakeSSSPass.h; path = ../../../addons/ofxPostProcessing/src/FakeSSSPass.h; sourceTree = SOURCE_ROOT; };
 		CC725CAE0A003458E5573DF9 /* GodRaysPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = GodRaysPass.h; path = ../../../addons/ofxPostProcessing/src/GodRaysPass.h; sourceTree = SOURCE_ROOT; };
-		CCE5A3CFAE5F41471F468089 /* actionEvent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = actionEvent.cpp; path = ../../../addons/ofxAction/src/actionEvent.cpp; sourceTree = SOURCE_ROOT; };
 		CFB16F8CCCD34118E86A7846 /* factory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = factory.h; path = ../../../addons/ofxLayout/src/layout/factory.h; sourceTree = SOURCE_ROOT; };
 		D41ED8C8083845703AA1FDFA /* BloomPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = BloomPass.cpp; path = ../../../addons/ofxPostProcessing/src/BloomPass.cpp; sourceTree = SOURCE_ROOT; };
 		D62ADF08260E3D3804D83056 /* effects.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = effects.cpp; path = ../../../addons/ofxLayout/src/layout/effects.cpp; sourceTree = SOURCE_ROOT; };
@@ -226,7 +218,6 @@
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		E547AB568F5E5027A880C47C /* ToonPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ToonPass.cpp; path = ../../../addons/ofxPostProcessing/src/ToonPass.cpp; sourceTree = SOURCE_ROOT; };
 		E777B94FE43B4D5CD747A3FB /* row.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = row.cpp; path = ../../../addons/ofxLayout/src/layout/row.cpp; sourceTree = SOURCE_ROOT; };
-		E79689BE4003AFA2999ED486 /* actionListener.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = actionListener.cpp; path = ../../../addons/ofxAction/src/actionListener.cpp; sourceTree = SOURCE_ROOT; };
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
@@ -384,14 +375,6 @@
 			path = /Users/osilokee/Downloads/of_v0.8.3_osx_release/addons/ofxLayout/example_config/../src/layout;
 			sourceTree = "<absolute>";
 		};
-		7A5BD920CC162FD47CFB67C7 /* ofxAction */ = {
-			isa = PBXGroup;
-			children = (
-				9BF94DCD2EED70BE3273C5B8 /* src */,
-			);
-			name = ofxAction;
-			sourceTree = "<group>";
-		};
 		8D83D7AC476703EBECC1932D /* ofxAnimatable */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,19 +390,6 @@
 			);
 			name = src;
 			sourceTree = SOURCE_ROOT;
-		};
-		9BF94DCD2EED70BE3273C5B8 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CCE5A3CFAE5F41471F468089 /* actionEvent.cpp */,
-				564EB7E51C4D1CD2AE721450 /* actionEvent.h */,
-				3E89C9D048AB651B0B0B0F0E /* actionHandler.cpp */,
-				BAF3772BC082253909C54221 /* actionHandler.h */,
-				E79689BE4003AFA2999ED486 /* actionListener.cpp */,
-				AA4DFB142CC3FF89B21F4FC0 /* actionListener.h */,
-			);
-			name = src;
-			sourceTree = "<group>";
 		};
 		AFF78A8EB1A778F89BAD1809 /* src */ = {
 			isa = PBXGroup;
@@ -496,7 +466,6 @@
 			isa = PBXGroup;
 			children = (
 				3C6F3D7319CFBEDC002AA367 /* ofxJSON */,
-				7A5BD920CC162FD47CFB67C7 /* ofxAction */,
 				8D83D7AC476703EBECC1932D /* ofxAnimatable */,
 				3D6CE789083A6ABD3E3DE490 /* ofxLayout */,
 				4B6F57BE3EF6A8553357A937 /* ofxObservableProperty */,
@@ -703,9 +672,6 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				50C91BD24365E6EAA376F7B2 /* actionEvent.cpp in Sources */,
-				ED1DD4742C18B254E00FC85F /* actionHandler.cpp in Sources */,
-				CCE3DFC9EFA410B15C841DB9 /* actionListener.cpp in Sources */,
 				52C77060FBB9307AEFDAE8C6 /* ofxAnimatable.cpp in Sources */,
 				5D067CF087427621DD1E64B8 /* ofxAnimatableFloat.cpp in Sources */,
 				74D31933EE82E12834DB3B06 /* ofxAnimatableOfColor.cpp in Sources */,

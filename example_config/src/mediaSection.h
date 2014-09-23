@@ -23,6 +23,9 @@ public:
     VideoSection(const std::string key, const Json::Value data): Section(key, data){}
 //    ~VideoSection(){}
     int getColor(){
+        /**
+         Example of using custom arguments from the layout file
+         **/
         if(data.isMember("color")){
             Json::Value color = data["color"];
             if (color.isMember("hex")){
@@ -44,12 +47,7 @@ public:
         }
         videoGrabber.setDeviceID(0);
         videoGrabber.setDesiredFrameRate(30);
-        bool init = videoGrabber.initGrabber(720, 480);
-        polyline.lineTo(20,20);
-        polyline.lineTo(40,20);
-        polyline.lineTo(40,40);
-        polyline.lineTo(20,40);
-        polyline.close();
+        bool init = videoGrabber.initGrabber(720, 480); 
     }
     void onAttachedToParent(){
         /**
@@ -70,6 +68,7 @@ public:
     }
     void draw(int x, int y, int w, int h){ 
         //Draw whatever here, the x, y, w and h are handled by the parent section
+        //Use our color variable to set border color
         ofSetHexColor(getColor());
         ofNoFill();
         ofRect(x, y, w, h);

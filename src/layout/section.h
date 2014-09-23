@@ -1,6 +1,6 @@
 //
 //  section.h
-//  signage
+//  ofxLayout
 //
 //  Created by Osiloke Emoekpere on 3/16/14.
 //
@@ -9,13 +9,10 @@
 #ifndef signage_section_h
 #define signage_section_h 
 
-#include "actionListener.h"
-#include "actionEvent.h"
 #include "propertyEvent.h"
 #include "intProperty.h"
 #include "boolProperty.h"
-#include <json/json.h>
-//#include "sectionFactory.h"
+#include <json/json.h> 
 
 
 namespace Kabbou {
