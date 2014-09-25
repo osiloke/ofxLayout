@@ -37,7 +37,7 @@ public:
     void setup();
     void add(Section &section, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f);
     void add(Section &section, ofxJSONElement props);
-    void addChild(Section::Ptr section);
+    void addChild(Section* section);
 //    void show(Section &section);
     void hideChild(Section &section);
     void focusChild(Section &section);

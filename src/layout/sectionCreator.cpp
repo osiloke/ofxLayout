@@ -11,6 +11,6 @@
 
 SectionCreator::SectionCreator(std::string name)
 {
-    SectionCreator::Ptr p(this);
+    SectionCreator* p(this);
 	SectionFactory::registerit(name, p);
 }

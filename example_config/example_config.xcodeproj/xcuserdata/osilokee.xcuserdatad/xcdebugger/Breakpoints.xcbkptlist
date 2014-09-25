@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/layout/parser.h"
-         timestampString = "433107527.186024"
+         timestampString = "433132168.343316"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "fromFile(std::string filename)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,7 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/mediaSection.h"
+<<<<<<< Updated upstream
          timestampString = "433188761.222455"
+=======
+         timestampString = "433132830.485553"
+>>>>>>> Stashed changes
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "49"
@@ -177,7 +181,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/mediaSection.h"
+<<<<<<< Updated upstream
          timestampString = "433188761.222455"
+=======
+         timestampString = "433132830.485553"
+>>>>>>> Stashed changes
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "50"
@@ -195,7 +203,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "183"
          endingLineNumber = "183"
-         landmarkName = "addChild(Section::Ptr section)"
+         landmarkName = "addChild(Section* section)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint

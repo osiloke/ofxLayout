@@ -15,7 +15,7 @@
 
 namespace Kabbou{
     class ColumnLayout:public FluidLayout{
-        REGISTER_SECTION(ColumnLayout);
+    REGISTER_SECTION(ColumnLayout);
     public:
         typedef shared_ptr<ColumnLayout> Ptr;
         ColumnLayout(std::string key, Json::Value data): FluidLayout(key, data){};

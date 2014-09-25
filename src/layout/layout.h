@@ -14,7 +14,6 @@
 #include <vector>
 #include "ofMain.h"
 #include "section.h"
-#include "actionListener.h"
 #include "propertyEvent.h"
 #include "sectionFactory.h"
 
@@ -69,19 +68,19 @@ namespace Kabbou{
             section->onShow();
         }
     };
-    class FluidLayout: public ActionListener, public Section{
+    class FluidLayout: public Section{
     private:
         static const SectionCreatorImpl<FluidLayout> creator;
     public:
         
         int w, h, x, y;
         typedef shared_ptr<FluidLayout> Ptr;
-        FluidLayout(std::string key):ActionListener(key),Section(key){
+        FluidLayout(std::string key):Section(key){
         }
-        FluidLayout(std::string key, Json::Value data):ActionListener(key),Section(key, data){
+        FluidLayout(std::string key, Json::Value data):Section(key, data){
         }
         
-        FluidLayout(): ActionListener("layout"), Section("layout"){
+        FluidLayout():Section("layout"){
         }
         
         void setKey(std::string key){
@@ -91,7 +90,6 @@ namespace Kabbou{
         virtual void setup(){
             resetMaxPosition();
             it_displayable = displayable.begin();
-            ActionListener::setup();
         }
         
         virtual void update(){
@@ -176,7 +174,7 @@ namespace Kabbou{
                 t_x = 0;
         }
         
-        virtual void addChild(Section::Ptr section){
+        virtual void addChild(Section* section){
             /**
              Add a child section/layout
              **/

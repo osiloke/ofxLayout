@@ -74,7 +74,7 @@ void OverlayLayout::update(){
         pass->setProgress(displayableAnimation.val()); 
     }
 }
-void OverlayLayout::addChild(Section::Ptr section){
+void OverlayLayout::addChild(Section* section){
     /**
      Add a child section/layout
      **/

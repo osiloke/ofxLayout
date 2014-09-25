@@ -21,7 +21,7 @@ namespace Kabbou {
         void onPropertyChanged(PropertyEvent & args){};
     public:
         typedef shared_ptr<Section> Ptr;
-        virtual Section::Ptr create(){};
+        virtual Section* create(){};
         IntProperty width;
         IntProperty height;
         IntProperty x_pos;
@@ -34,13 +34,13 @@ namespace Kabbou {
         void processAction(ActionEvent &e){
             
         }
-        virtual void addChild(Section::Ptr section){
+        virtual void addChild(Section* section){
             
         }
         virtual void onAttachedToParent(){
             
         }
-        virtual void removeChild(Section::Ptr section){
+        virtual void removeChild(Section* section){
             
         }
         virtual void hideChild(Section &section){

@@ -16,7 +16,7 @@ private:
                 ofxJSONElement root = config[key];
                 Json::Value children = root.removeMember("children");
                 
-                Section::Ptr rootLayout = SectionFactory::create(key, root["key"].asString(), root);
+                Section* rootLayout = SectionFactory::create(key, root["key"].asString(), root);
                 
                 std::string s_width = root.get("width", "").asString();
                 std::string s_height = root.get("height", "").asString();
@@ -46,7 +46,7 @@ private:
                 
             }
     }
-    void  computeChildren(ofxJSONElement children, Section::Ptr parentLayout){
+    void  computeChildren(ofxJSONElement children, Section* parentLayout){
         for(int i = 0; i < children.size(); i++)
         {
             Json::Value child = children[i];
@@ -57,7 +57,7 @@ private:
                 ss << key << "_"<<i;
                 
                 Json::Value nextChildren = root.removeMember("children");
-                Section::Ptr rootLayout = SectionFactory::create(key, root["key"].asString(), root);
+                Section* rootLayout = SectionFactory::create(key, root["key"].asString(), root);
                 
                 parentLayout->addChild(rootLayout);
                 
@@ -73,6 +73,10 @@ private:
 public:
     LayoutParser(){};
 	LayoutParser(ofxJSONElement config):config(config){};
+    void fromJson(Json::Value data){
+        config = data;
+        computeLayout();
+    }
     void fromString(std::string config_data){
         config.parse(config_data);
         computeLayout();

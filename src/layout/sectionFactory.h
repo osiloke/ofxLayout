@@ -17,14 +17,14 @@ using namespace Kabbou;
 
 class SectionFactory{
 private:  
-    static std::map<std::string, SectionCreator::Ptr>& get_table();
-    static std::map<std::string, Section::Ptr>& get_sections();
+    static std::map<std::string, SectionCreator*>& get_table();
+    static std::map<std::string, Section*>& get_sections();
 public:
     SectionFactory(){ 
     };
-    static void registerit(const std::string& name, SectionCreator::Ptr creator);
-    static Section::Ptr create(const std::string& name, const std::string& key, const Json::Value& data);
-    static Section::Ptr getSection(std::string name);
+    static void registerit(const std::string& name, SectionCreator* creator);
+    static Section* create(const std::string& name, const std::string& key, const Json::Value& data);
+    static Section* getSection(std::string name);
 
     typedef shared_ptr<SectionFactory> Ptr;
 };

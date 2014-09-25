@@ -21,7 +21,7 @@ namespace Kabbou{
         RowLayout(std::string key): FluidLayout(key){}; 
         RowLayout(): FluidLayout("row"){};
         
-        void addChild(Section::Ptr section){
+        void addChild(Section* section){
             /**
              Add a child section/layout
              **/

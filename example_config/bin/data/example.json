@@ -6,23 +6,23 @@
     "x_pos": 0,
     "y_pos": 0,
     "children": [
-    {
-      "ColumnLayout": {
-        "key": "wrapper",
-        "children": [
-        {
-          "VideoSection": {
-            "key": "stream",
-            "w_percent": 0.5,
-            "h_percent": 0.5,
-            "halign": "left",
-            "valign": "bottom",
-            "visible": "yes",
-            "color": {
-              "hex": "0CCCA0"
-              },
-              "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
-            }
+      {
+        "ColumnLayout": {
+          "key": "wrapper",
+          "children": [
+            {
+              "VideoSection": {
+                "key": "stream",
+                "w_percent": 0.5,
+                "h_percent": 0.5,
+                "halign": "left",
+                "valign": "bottom",
+                "visible": "yes",
+                "color": {
+                  "hex": "0CCCA0"
+                },
+                "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
+              }
             },
             {
               "VideoSection": {
@@ -35,13 +35,13 @@
                 "fill": "yes",
                 "color": {
                   "hex": "56998A"
-                  },
-                  "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
-                }
+                },
+                "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
               }
-              ]
             }
-          }
           ]
         }
       }
+    ]
+  }
+}
