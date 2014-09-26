@@ -16,6 +16,8 @@
 #include "section.h"
 #include "sectionCreator.h"
 
+using namespace Kabbou;
+
 template <class T>
 class SectionCreatorImpl: public SectionCreator
 {

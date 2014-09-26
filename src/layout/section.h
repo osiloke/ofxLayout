@@ -13,6 +13,7 @@
 #include "intProperty.h"
 #include "boolProperty.h"
 #include <json/json.h> 
+#include "ofxJSONElement.h" 
 
 
 namespace Kabbou {
@@ -29,11 +30,8 @@ namespace Kabbou {
         BoolProperty b_displayed;
         Section * parent;
         std::string key;
-        Json::Value data;
+        Json::Value data; 
 
-        void processAction(ActionEvent &e){
-            
-        }
         virtual void addChild(Section* section){
             
         }

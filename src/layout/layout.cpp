@@ -11,8 +11,4 @@
 
 using namespace Kabbou;
 
-const SectionCreatorImpl<FluidLayout> FluidLayout::creator("FluidLayout");
-
-void FluidLayout::processAction(ActionEvent &e){
-    ofLogNotice(this->getType()) << e.message;
-}; 
+const SectionCreatorImpl<FluidLayout> FluidLayout::creator("FluidLayout"); 

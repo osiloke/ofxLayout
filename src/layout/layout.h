@@ -365,8 +365,7 @@ namespace Kabbou{
         std::map<std::string, FluidLayoutMember> members;
         std::vector<std::string> displayable; //stores displayable sections, it is ordered by the position of sections in the members map;
         std::vector<std::string>::iterator it_displayable;
-        std::map<std::string, std::vector<std::string>::iterator> member_index;
-        void processAction(ActionEvent &e);
+        std::map<std::string, std::vector<std::string>::iterator> member_index; 
    };
 }
 #endif /* defined(__signage__layout__) */
