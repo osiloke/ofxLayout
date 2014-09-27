@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "layout/parser.h"
+#include "ofxLayout.h"
 
 class ofApp : public ofBaseApp{
 

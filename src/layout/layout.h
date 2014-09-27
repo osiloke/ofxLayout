@@ -186,7 +186,7 @@ namespace Kabbou{
         }
         void onAttachedToParent(){
             /**
-             Gets called immediately after a layout has been attachd to a parent
+             Gets called immediately after a layout has been attached to a parent
              **/
             resetMaxPosition();
             setup();

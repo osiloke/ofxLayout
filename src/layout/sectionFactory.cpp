@@ -28,12 +28,25 @@ Section* SectionFactory::create(const std::string& name, const std::string& key,
     std::map<std::string, SectionCreator*>::iterator i;
     i = get_table().find(name);
     if (i != get_table().end()){
+        ofLogVerbose("ofxLayout::SectionFactory")<<"Found registered section, "<<name<<"["<<key<<"]";
+        
         Section* section = i->second->create(key, data);
+        ofLogVerbose("ofxLayout::SectionFactory")<<"Created section "<<name<<"["<<key<<"]";
+        
         get_sections().insert(std::pair<std::string, Section*>(key, section));
         return section;
+    }else{
+        ofLogVerbose("ofxLayout::SectionFactory")<<"Could not find section of type "<<name<<"["<<key<<"]";
+        return NULL;
     }
 };
 
+bool SectionFactory::isRegistered(std::string name){
+    if( get_table().find(name) == get_table().end()){
+        return false;
+    }
+    return true;
+}
 std::map<std::string, Section*>& SectionFactory::get_sections()
 {
 	static std::map<std::string, Section*> sections;

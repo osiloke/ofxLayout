@@ -36,7 +36,7 @@ namespace Kabbou {
             
         }
         virtual void onAttachedToParent(){
-            
+            setup();
         }
         virtual void removeChild(Section* section){
             

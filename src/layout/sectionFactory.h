@@ -25,7 +25,7 @@ public:
     static void registerit(const std::string& name, SectionCreator* creator);
     static Section* create(const std::string& name, const std::string& key, const Json::Value& data);
     static Section* getSection(std::string name);
-
+    static bool isRegistered(std::string name);
     typedef shared_ptr<SectionFactory> Ptr;
 };
 
