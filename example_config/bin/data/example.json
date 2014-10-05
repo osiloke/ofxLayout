@@ -11,7 +11,7 @@
           "key": "wrapper",
           "children": [
             {
-              "VideoSection": {
+              "CustomSection": {
                 "key": "stream",
                 "w_percent": 0.5,
                 "h_percent": 0.5,

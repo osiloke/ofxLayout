@@ -1,8 +1,8 @@
 //
-//  customSection.h
-//  example_config
+//  placeholderSection.h
+//  
 //
-//  Created by Osiloke Emoekpere on 9/22/14.
+//  Created by Osiloke Emoekpere on 10/05/14.
 //
 //
 
@@ -12,12 +12,12 @@
 #include <iostream>
 #include "sectionFactory.h"
 
-class CustomSection: public Section{
-//Let the section factory know that you can be created dynamically
-REGISTER_SECTION(CustomSection);
+class PlaceholderSection: public Section{
+    //Let the section factory know that you can be created dynamically
+    REGISTER_SECTION(PlaceholderSection);
 public:
     //Minimum constructor needed to use a section, This is assuming you are setting up sections from a section file
-    CustomSection(const std::string key, const Json::Value data): Section(key, data){}
+    PlaceholderSection(const std::string key, const Json::Value data): Section(key, data){}
     int getColor(){
         if(data.isMember("color")){
             Json::Value color = data["color"];
@@ -26,21 +26,14 @@ public:
             }
         }
         return 0;
-    } 
-    void onRefresh(){
-        /**
-         Called when parent has been altered and children need to be refreshed
-         **/
     }
-    void update(){ 
-    } 
     void draw(int x, int y, int w, int h){
         //Draw whatever here, the x, y, w and h are handled by the parent section
         ofSetHexColor(getColor());
-        ofFill();
-        ofRect(x, y, w, h);
         ofNoFill();
+        ofRect(x, y, w, h);
+        ofFill();
     };
 };
 
-#endif /* defined(__example_config__customSection__) */
+#endif /* defined(__example_config__placeholderSection__) */

@@ -114,17 +114,10 @@ namespace Kabbou {
         b_displayed(key + ".displayed", false),
         data(data){
         
-        }
-        virtual void setKey(std::string key){
-            this->key = key;
-            this->x_pos.key = key + ".x";
-            this->y_pos.key = key + ".y";
-            this->width.key = key + ".width";
-            this->height.key = key + ".height";
-            this->b_displayed = key + ".displayed";
-        }
+        } 
         
-        virtual void draw(){ 
+        virtual void draw(){
+            draw(x_pos.getValue().asInt(),y_pos.getValue().asInt(),width.getValue().asInt(),height.getValue().asInt());
         };
         virtual void draw(int x, int y){  
         

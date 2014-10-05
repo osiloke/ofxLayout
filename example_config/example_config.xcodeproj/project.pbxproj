@@ -15,6 +15,8 @@
 		33DB731E964056D7E35604A7 /* FakeSSSPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64B88209AF231B4FC8B4056 /* FakeSSSPass.cpp */; };
 		3A499904889C490DCF533C6E /* BloomPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41ED8C8083845703AA1FDFA /* BloomPass.cpp */; };
 		3BD65764474610DA6A9794B1 /* section.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869664A9165B9FD682672D8A /* section.cpp */; };
+		3C297F3F19E0CBB9000633ED /* mediaSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C297F3B19E0CBB9000633ED /* mediaSection.cpp */; };
+		3C297F4019E0CBB9000633ED /* placeholderSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C297F3D19E0CBB9000633ED /* placeholderSection.cpp */; };
 		3C6F3DCB19CFBEDF002AA367 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F3DB919CFBEDF002AA367 /* jsoncpp.cpp */; };
 		3C6F3DCC19CFBEDF002AA367 /* ofxJSONElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F3DBD19CFBEDF002AA367 /* ofxJSONElement.cpp */; };
 		3C6F3DE319CFD390002AA367 /* sectionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F3DE119CFD38E002AA367 /* sectionFactory.cpp */; };
@@ -124,6 +126,10 @@
 		3557E165C80CCB8EAF7AA57B /* stringProperty.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = stringProperty.cpp; path = ../../../addons/ofxObservableProperty/src/stringProperty.cpp; sourceTree = SOURCE_ROOT; };
 		36B9B6CD565C4C6A5BE96680 /* ofxAnimatable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAnimatable.h; path = ../../../addons/ofxAnimatable/src/ofxAnimatable.h; sourceTree = SOURCE_ROOT; };
 		3AACD9661AF21261E24A05A4 /* ConvolutionPass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ConvolutionPass.cpp; path = ../../../addons/ofxPostProcessing/src/ConvolutionPass.cpp; sourceTree = SOURCE_ROOT; };
+		3C297F3B19E0CBB9000633ED /* mediaSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mediaSection.cpp; sourceTree = "<group>"; };
+		3C297F3C19E0CBB9000633ED /* mediaSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mediaSection.h; sourceTree = "<group>"; };
+		3C297F3D19E0CBB9000633ED /* placeholderSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = placeholderSection.cpp; sourceTree = "<group>"; };
+		3C297F3E19E0CBB9000633ED /* placeholderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = placeholderSection.h; sourceTree = "<group>"; };
 		3C39EA8CB1911093FD56F9ED /* HorizontalTiltShifPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = HorizontalTiltShifPass.h; path = ../../../addons/ofxPostProcessing/src/HorizontalTiltShifPass.h; sourceTree = SOURCE_ROOT; };
 		3C54573642A32801B54F65CE /* manager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = manager.h; path = ../../../addons/ofxLayout/src/layout/manager.h; sourceTree = SOURCE_ROOT; };
 		3C6F3D7419CFBEDC002AA367 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
@@ -263,6 +269,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C297F3A19E0CBB9000633ED /* sections */ = {
+			isa = PBXGroup;
+			children = (
+				3C297F3B19E0CBB9000633ED /* mediaSection.cpp */,
+				3C297F3C19E0CBB9000633ED /* mediaSection.h */,
+				3C297F3D19E0CBB9000633ED /* placeholderSection.cpp */,
+				3C297F3E19E0CBB9000633ED /* placeholderSection.h */,
+			);
+			path = sections;
+			sourceTree = "<group>";
+		};
 		3C6F3D7319CFBEDC002AA367 /* ofxJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +403,7 @@
 		96A094E28DE5042D38C466B5 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				3C297F3A19E0CBB9000633ED /* sections */,
 				77D15063F4BA97D54A341DB9 /* layout */,
 			);
 			name = src;
@@ -719,6 +737,8 @@
 				3C6F3DE919CFDD83002AA367 /* sectionCreator.cpp in Sources */,
 				3C6F3DEC19D0B2CC002AA367 /* customSection.cpp in Sources */,
 				3C6F3DEF19D0B9BB002AA367 /* mediaSection.cpp in Sources */,
+				3C297F3F19E0CBB9000633ED /* mediaSection.cpp in Sources */,
+				3C297F4019E0CBB9000633ED /* placeholderSection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

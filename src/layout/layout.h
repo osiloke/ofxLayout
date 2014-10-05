@@ -30,16 +30,16 @@ namespace Kabbou{
             updateItem(x, y, w, h);
         }
         
-        virtual void draw(){
+        void draw(){
             section->draw();
         }
         
         
-        virtual void draw(int x, int y){
+        void draw(int x, int y){
             section->draw(x, y);
         }
         
-        virtual void draw(int x, int y, int w, int h){
+        void draw(int x, int y, int w, int h){
             section->draw(x, y, w, h);
         }
         
@@ -81,11 +81,7 @@ namespace Kabbou{
         }
         
         FluidLayout():Section("layout"){
-        }
-        
-        void setKey(std::string key){
-            this->key = key;
-        }
+        } 
         
         virtual void setup(){
             resetMaxPosition();

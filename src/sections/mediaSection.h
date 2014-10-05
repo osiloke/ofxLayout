@@ -1,21 +1,20 @@
 //
 //  mediaSection.h
-//  example_config
+//  signage
 //
-//  Created by Osiloke Emoekpere on 9/22/14.
+//  Created by Osiloke Emoekpere on 10/5/14.
 //
 //
 
-#ifndef __example_config__mediaSection__
-#define __example_config__mediaSection__
+#ifndef __signage__mediaSection__
+#define __signage__mediaSection__
 
 #include <iostream>
 #include "sectionFactory.h"
 #include "ofMain.h"
-
 class VideoSection: public Section{
-//Let the section factory know that you can be created dynamically
-REGISTER_SECTION(VideoSection);
+    //Let the section factory know that you can be created dynamically
+    REGISTER_SECTION(VideoSection);
     ofVideoGrabber videoGrabber;
     ofPolyline polyline;
 public:
@@ -47,31 +46,24 @@ public:
         }
         videoGrabber.setDeviceID(0);
         videoGrabber.setDesiredFrameRate(30);
-        bool init = videoGrabber.initGrabber(720, 480); 
-    }
-    void onAttachedToParent(){
-        /**
-         Gets called immediately after this section has been attachd for the first time to a parent
-         **/ 
-        Section::onAttachedToParent();
-        /** ... **/
-    }
+        bool init = videoGrabber.initGrabber(720, 480);
+    } 
     void onRefresh(){
         /**
          Called when parent has been altered and children need to be refreshed
          **/
     }
-    void update(){ 
+    void update(){
         videoGrabber.update();
     } 
-    void draw(int x, int y, int w, int h){ 
+    void draw(int x, int y, int w, int h){
         //Draw whatever here, the x, y, w and h are handled by the parent section
         //Use our color variable to set border color
         ofSetHexColor(getColor());
         ofNoFill();
         ofRect(x, y, w, h);
-        ofSetColor(255, 255, 255); 
+        ofSetColor(255, 255, 255);
         videoGrabber.draw(x, y, w, h);
     };
 };
-#endif /* defined(__example_config__mediaSection__) */
+#endif /* defined(__signage__mediaSection__) */
