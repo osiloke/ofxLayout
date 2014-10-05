@@ -21,7 +21,15 @@ namespace Kabbou{
         ColumnLayout(std::string key, Json::Value data): FluidLayout(key, data){};
         ColumnLayout(std::string key): FluidLayout(key){};
         ColumnLayout(): FluidLayout("column"){};
-        
+        void addChild(Section* section){
+            /**
+             Add a child section/layout
+             **/
+            Json::Value props = section->getData();
+            this->add(*section, props.get("w_percent", 1.0f).asFloat());
+            section->onAttachedToParent();
+        }
+
         void add(Kabbou::Section &section, float w_percent=1.0f, float padding=0.0f);
         
         void changeRatio(Section &section, float w_percent=0.0f);

@@ -95,7 +95,10 @@ namespace Kabbou{
                 section.update();
             };
         };
-        
+        /**
+         Overloaded virtual function which draws all child sections attached to this layout. 
+         @return void
+         */
         virtual void draw(){
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
             for ( it = displayable.rbegin(); it != displayable.rend(); it++){

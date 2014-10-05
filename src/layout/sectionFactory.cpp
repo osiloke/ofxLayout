@@ -1,6 +1,6 @@
 //
 //  sectionFactory.cpp
-//  example_config
+//  ofxLayout
 //
 //  Created by Osiloke Emoekpere on 9/21/14.
 //
@@ -20,6 +20,8 @@ Section* SectionFactory::getSection(std::string name){
     found = get_sections().find(name);
     if (found != get_sections().end()){
         return found->second;
+    }else{
+        return NULL;
     }
     
 };

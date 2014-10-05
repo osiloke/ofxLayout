@@ -49,8 +49,9 @@ void ColumnLayout::calcTargets(float w_percent, float h_percent, float padding, 
 };
 void ColumnLayout::clip(int &t_x, int &t_y, int &t_w, int &t_h){
     int h = height.getValue().asInt(), w = width.getValue().asInt();
-    if (t_h >= (h - cum_height))
-        t_y = 0;
+//    if (t_h >= (h + cum_height))
+//        t_y = 0;
+    t_y = y_pos.getValue().asInt(); 
 }
 void ColumnLayout::calculatePadding(int &t_x, int &t_y, int &t_w, int &t_h, float p){
     int w_p = p * t_w; //What to take off the left and right site
