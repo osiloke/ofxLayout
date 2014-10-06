@@ -136,6 +136,8 @@ namespace Kabbou {
         
         virtual void setup(){};
         virtual void setup(int x, int y, int w, int h){}
+        
+        virtual void handleMessage(ofxJSONElement message){};
     
     };
 }

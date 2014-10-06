@@ -30,9 +30,9 @@ public:
     void draw(int x, int y, int w, int h){
         //Draw whatever here, the x, y, w and h are handled by the parent section
         ofSetHexColor(getColor());
-        ofNoFill();
+//        ofNoFill();
         ofRect(x, y, w, h);
-        ofFill();
+//        ofFill();
     };
 };
 

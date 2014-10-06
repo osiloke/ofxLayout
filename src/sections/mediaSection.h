@@ -62,7 +62,7 @@ public:
         ofSetHexColor(getColor());
         ofNoFill();
         ofRect(x, y, w, h);
-        ofSetColor(255, 255, 255);
+        ofSetColor(255, 255, 255); 
         videoGrabber.draw(x, y, w, h);
     };
 };
