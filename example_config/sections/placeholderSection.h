@@ -1,13 +1,4 @@
-//
-//  placeholderSection.h
-//  
-//
-//  Created by Osiloke Emoekpere on 10/05/14.
-//
-//
-
-#ifndef __example_config__customSection__
-#define __example_config__customSection__
+#pragma once
 
 #include <iostream>
 #include "sectionFactory.h"
@@ -34,6 +25,4 @@ public:
         ofRect(x, y, w, h);
         ofFill();
     };
-};
-
-#endif /* defined(__example_config__placeholderSection__) */
+}; 
