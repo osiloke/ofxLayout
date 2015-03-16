@@ -1,8 +1,6 @@
 ofxLayout
 =========
 
-NOTE: I looked into ofxUI and XMLSettings and figured that i may be reinventing the wheel here. So i'm not sure if i want to continue working on this addon. I may have only contributed a json specification for layouts.
-
 A layout management framework for managing multiple drawable classes in openframeworks. It allows you to easily place any drawable class into a layout, like Row, Column, Overlay etc. This is based on my short experience with python Kivy. It also has a WIP layout language similar to kivy's kv language.
 
 Requires openframeworks >= v0.8.3
