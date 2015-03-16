@@ -1,21 +1,14 @@
-//
-//  column.cpp
-//  signage
-//
-//  Created by Osiloke Emoekpere on 4/17/14.
-//
-//
 
 #include "column.h"
 
 REGISTERSECTIONIMPL(ColumnLayout);
 
-void ColumnLayout::add(Kabbou::Section &section, float w_percent, float padding){
+void ColumnLayout::add(Section *section, float w_percent, float padding){
     FluidLayout::add(section, w_percent, 1.0f, padding);
 }
 
-void ColumnLayout::changeRatio(Section &section, float w_percent){
-    changeRatio(section.key, w_percent);
+void ColumnLayout::changeRatio(Section *section, float w_percent){
+    changeRatio(section->key, w_percent);
 }
 void ColumnLayout::changeRatio(std::string section, float w_percent){
     FluidLayout::changeRatio(section, w_percent, 1.0f);
@@ -63,24 +56,4 @@ void ColumnLayout::calculatePadding(int &t_x, int &t_y, int &t_w, int &t_h, floa
     //Reposition to center
     t_x = t_x + w_p;
     t_y = t_y + h_p;
-}
-void ColumnLayout::setup(){
-    FluidLayout::setup();
-}
-void ColumnLayout::hide(Section &section){
-//    section.width.setValue(0);
-    FluidLayout::hide(section);
-//    organize();
-}
-void ColumnLayout::show(Section &section){
-    FluidLayoutMember _section = members.at(section.key);
-    FluidLayout::show(_section);
-//    organize();
-}
-void ColumnLayout::hideChild(Section &section){
-    hide(section);
-}
-
-void ColumnLayout::showChild(Section &section){
-    show(section);
-}
+} 

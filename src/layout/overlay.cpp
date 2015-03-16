@@ -40,19 +40,19 @@ void OverlayLayout::draw(){
         for ( it = displayable.rbegin(); it != displayable.rend(); it++){
             if(*it != visible)
             {
-                FluidLayoutMember section = members.at((*it));
-                section.draw(section.x, section.y, section.w, section.h);
+                Section * section = members.at((*it));
+                section->draw(section->X(), section->Y(), section->Width(), section->Height());
             } 
         }
         post.end();
         
-        FluidLayoutMember section = members.at((visible));
-        section.draw();
+        Section * section = members.at((visible));
+        section->draw();
         
     }else{
         for ( it = displayable.rbegin(); it != displayable.rend(); it++){ 
-                FluidLayoutMember section = members.at((*it));
-                section.draw(section.x, section.y, section.w, section.h);
+                Section * section = members.at((*it));
+                section->draw(section->X(), section->Y(), section->Width(), section->Height());
             } 
     }
     
@@ -67,8 +67,8 @@ void OverlayLayout::update(){
         if (_next_visible != ""){
             visible = _next_visible;
             _next_visible = "";
-            FluidLayoutMember section = members.at(visible);
-            FluidLayout::show(section);
+            Section * section = members.at(visible);
+            FluidLayout::showChild(section);
         }
 //    }else{
 //        pass->setProgress(displayableAnimation.val()); 
@@ -79,10 +79,10 @@ void OverlayLayout::addChild(Section* section){
      Add a child section/layout
      **/
     Json::Value props = section->getData();
-    this->add(*section, props);
+    this->add(section, props);
     section->onAttachedToParent();
 }
-void OverlayLayout::add(Section &section, ofxJSONElement props){
+void OverlayLayout::add(Section * section, ofxJSONElement props){
     std::string halign = props.get("halign", "left").asString();
     std::string valign = props.get("valign", "bottom").asString();
     
@@ -92,7 +92,7 @@ void OverlayLayout::add(Section &section, ofxJSONElement props){
     std::string visible = props.get("visible", "no").asString();
     
     if (visible == "yes"){
-        visible = section.key;
+        visible = section->key;
     }
     if(halign == "center"){
         padding = padding + 1.0f - w_percent;
@@ -100,19 +100,20 @@ void OverlayLayout::add(Section &section, ofxJSONElement props){
     
     FluidLayout::add(section, w_percent, h_percent, padding);
 }
-void OverlayLayout::add(Section &section, float w_percent, float h_percent, float padding){
+
+void OverlayLayout::add(Section * section, float w_percent, float h_percent, float padding){
     FluidLayout::add(section, w_percent, h_percent, padding);
 //    visible = section.key;
 }
 
-void OverlayLayout::focusChild(Section &section){
-    _next_visible = section.key;
+void OverlayLayout::focusChild(Section * section){
+    _next_visible = section->key;
     //Do fade animation
 //    displayableAnimation.animateFromTo(0.0f, target_p);
     
 }
 
-void OverlayLayout::deFocusChild(Section &section){
+void OverlayLayout::deFocusChild(Section * section){
     _next_visible = "";
     //Do fade animation
 //    displayableAnimation.animateFromTo(target_p, 0.0f);
@@ -120,8 +121,8 @@ void OverlayLayout::deFocusChild(Section &section){
 }
 
 
-void OverlayLayout::hideChild(Section &section){
-    FluidLayout::hide(section);
+void OverlayLayout::hideChild(Section * section){
+    FluidLayout::hideChild(section);
     visible = "";
     _next_visible = "";
 //    displayableAnimation.animateFromTo(target_p, 0.0f);

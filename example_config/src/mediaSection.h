@@ -51,7 +51,7 @@ public:
     }
     void onAttachedToParent(){
         /**
-         Gets called immediately after this section has been attachd for the first time to a parent
+         Gets called immediately after this section has been attached for the first time to a parent
          **/ 
         Section::onAttachedToParent();
         /** ... **/
@@ -63,7 +63,8 @@ public:
     }
     void update(){ 
         videoGrabber.update();
-    } 
+    }
+    
     void draw(int x, int y, int w, int h){ 
         //Draw whatever here, the x, y, w and h are handled by the parent section
         //Use our color variable to set border color

@@ -1,13 +1,5 @@
-//
-//  row.h
-//  signage
-//
-//  Created by Osiloke Emoekpere on 4/25/14.
-//
-//
+#pragma once
 
-#ifndef __signage__row__
-#define __signage__row__
 #include "layout.h"
 #include <iostream>
 #include "sectionFactory.h"
@@ -21,25 +13,27 @@ namespace Kabbou{
         RowLayout(std::string key): FluidLayout(key){}; 
         RowLayout(): FluidLayout("row"){};
         
-        void addChild(Section* section){
+        void addChild(Section * section){
             /**
              Add a child section/layout
              **/
             Json::Value props = section->getData();
-            this->add(*section, props.get("h_percent", 1.0f).asFloat());
+            this->add(section, props.get("h_percent", 1.0f).asFloat());
             section->onAttachedToParent();
         }
         
-        void add(Kabbou::Section &section, float h_percent=1.0f){
+        void add(Kabbou::Section * section, float h_percent=1.0f){
             FluidLayout::add(section, 1.0f, h_percent);
         }
         
         void changeRatio(Section &section, float h_percent=0.0f){
             changeRatio(section.key, h_percent);
         }
+        
         void changeRatio(std::string section, float h_percent=0.0f){
             FluidLayout::changeRatio(section, 1.0f, h_percent);
         }
+        
         void updateMaxPos(int t_w, int t_h){
             int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
             
@@ -57,26 +51,24 @@ namespace Kabbou{
         void setup(){
             FluidLayout::setup();
         }
-        void hide(Section &section){
-            section.width.setValue(0);
-            FluidLayout::hide(section);
-            organize();
-        }
-        void show(Section &section){
-            FluidLayout::show(section);
-            organize();
-        }
-        void hideChild(Section &section){
-            hide(section);
+        
+        void draw(){
+            FluidLayout::draw();
         }
         
-        void showChild(Section &section){
-            show(section);
+        void hideChild(Section * section){
+            section->width.setValue(0);
+            FluidLayout::hideChild(section);
+            organize();
+        }
+        
+        void showChild(Section * section){
+            FluidLayout::showChild(section);
+            organize();
         }
         
         std::string getType(){
             return "Row Layout";
         }
     };
-};
-#endif /* defined(__signage__row__) */
+}; 
