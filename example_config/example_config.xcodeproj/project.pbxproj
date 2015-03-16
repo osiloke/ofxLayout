@@ -142,7 +142,6 @@
 		3C6F3DBC19CFBEDF002AA367 /* ofxJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxJSON.h; sourceTree = "<group>"; };
 		3C6F3DBD19CFBEDF002AA367 /* ofxJSONElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxJSONElement.cpp; sourceTree = "<group>"; };
 		3C6F3DBE19CFBEDF002AA367 /* ofxJSONElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxJSONElement.h; sourceTree = "<group>"; };
-		3C6F3DDA19CFC61C002AA367 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		3C6F3DE119CFD38E002AA367 /* sectionFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sectionFactory.cpp; sourceTree = "<group>"; };
 		3C6F3DE219CFD38F002AA367 /* sectionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sectionFactory.h; sourceTree = "<group>"; };
 		3C6F3DE419CFDD33002AA367 /* sectionImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sectionImpl.cpp; sourceTree = "<group>"; };
@@ -367,7 +366,6 @@
 			children = (
 				3C6F3DE119CFD38E002AA367 /* sectionFactory.cpp */,
 				3C6F3DE219CFD38F002AA367 /* sectionFactory.h */,
-				3C6F3DDA19CFC61C002AA367 /* utils.h */,
 				439613F70EC4BEA7AB79F5FD /* column.cpp */,
 				61A88C9F86EA0FDABDC335C8 /* column.h */,
 				D62ADF08260E3D3804D83056 /* effects.cpp */,
@@ -389,8 +387,8 @@
 				3C6F3DE819CFDD82002AA367 /* sectionCreator.h */,
 			);
 			name = layout;
-			path = /Users/osilokee/Downloads/of_v0.8.3_osx_release/addons/ofxLayout/example_config/../src/layout;
-			sourceTree = "<absolute>";
+			path = ../src/layout;
+			sourceTree = SOURCE_ROOT;
 		};
 		8D83D7AC476703EBECC1932D /* ofxAnimatable */ = {
 			isa = PBXGroup;

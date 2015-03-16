@@ -1,13 +1,4 @@
-//
-//  layout.h
-//  signage
-//
-//  Created by Osiloke Emoekpere on 3/20/14.
-//
-//
-
-#ifndef __signage__layout__
-#define __signage__layout__
+#pragma once
 
 #include <iostream>
 #include <map>
@@ -18,7 +9,14 @@
 #include "sectionFactory.h"
 
 namespace Kabbou{
-    
+    /*
+    This wraps a section and stores the original layout config, the section does not have any idea about its percentage layout
+    and can only use its width, height, x and y vals. 
+
+    NOTE:
+    This may be unneccessary, we could just put the original layout config as members of the section
+    i.e r_h_p, r_w_p, r_p_p which represent real height, width and padding percent
+    */
     class FluidLayoutMember{
     public:
         Section * section;
@@ -71,6 +69,33 @@ namespace Kabbou{
     class FluidLayout: public Section{
     private:
         static const SectionCreatorImpl<FluidLayout> creator;
+        
+    protected:
+        virtual void updateMaxPos(int t_w, int t_h){
+            int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
+            
+            cum_height = cum_height + t_h;
+            if (cum_width != w)
+                cum_width = cum_width + t_w;
+        };
+        
+        virtual void hideChild(Section &section){
+            hide(section);
+        }
+        
+        virtual void showChild(Section &section){
+            show(section);
+        }
+        
+        virtual void focusChild(Section &section){
+            focus(section);
+        }
+        
+        int  cum_width, cum_height;
+        std::map<std::string, FluidLayoutMember> members;
+        std::vector<std::string> displayable; //stores displayable sections, it is ordered by the position of sections in the members map;
+        std::vector<std::string>::iterator it_displayable;
+        std::map<std::string, std::vector<std::string>::iterator> member_index;
     public:
         
         int w, h, x, y;
@@ -103,14 +128,7 @@ namespace Kabbou{
             std::vector<std::string>::reverse_iterator it = displayable.rbegin();
             for ( it = displayable.rbegin(); it != displayable.rend(); it++){
                 FluidLayoutMember section = members.at((*it));
-                section.draw();
-//                std::map<std::string, FluidLayoutMember>::iterator found;
-//                found = members.find((*it));
-//                if (found != members.end()){
-//                    FluidLayoutMember section = found->second;
-//                    
-//                    section->draw();
-//                }
+                section.draw(); 
             }
 
         }
@@ -302,14 +320,7 @@ namespace Kabbou{
                 updateMaxPos(t_w, t_h);
                 
                 calculatePadding(t_x, t_y, t_w, t_h, section.p_p);
-                
-//                if (it+1 == displayable.rend()){
-//                    //Maximize item since its the last item. Dont leave any space
-//                    section->updateItem(t_x, t_y, t_w + ((w + x) - cum_width), t_h + ((h + y) - cum_height));
-//                }else{
-                    section.updateItem(t_x, t_y, t_w, t_h);
-//                }
-                
+                section.updateItem(t_x, t_y, t_w, t_h); 
                 section.section->organize();
             }
         }
@@ -338,33 +349,5 @@ namespace Kabbou{
         virtual std::string getType(){
             return "Fluid Layout";
         }
-        
-    protected:
-        virtual void updateMaxPos(int t_w, int t_h){
-            int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
-            
-            cum_height = cum_height + t_h;
-            if (cum_width != w)
-                cum_width = cum_width + t_w;
-        };
-
-        virtual void hideChild(Section &section){
-            hide(section);
-        }
-        
-        virtual void showChild(Section &section){
-            show(section);
-        }
-        
-        virtual void focusChild(Section &section){
-            focus(section);
-        }
-        
-        int  cum_width, cum_height;
-        std::map<std::string, FluidLayoutMember> members;
-        std::vector<std::string> displayable; //stores displayable sections, it is ordered by the position of sections in the members map;
-        std::vector<std::string>::iterator it_displayable;
-        std::map<std::string, std::vector<std::string>::iterator> member_index; 
    };
-}
-#endif /* defined(__signage__layout__) */
+} 

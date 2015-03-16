@@ -10,11 +10,11 @@
 #define __OVERLAY_LAYOUT__
 
 #include "layout.h"
-#include <iostream>
-#include "ofxPostProcessing.h"
+#include <iostream> 
 #include "effects.h"
-#include "ofxAnimatableFloat.h"
+//#include "ofxAnimatableFloat.h"
 #include "sectionFactory.h"
+#include "ofxPostProcessing.h"
 
 namespace Kabbou{
 class OverlayLayout:public FluidLayout{
@@ -25,7 +25,7 @@ REGISTER_SECTION(OverlayLayout);
     ofFbo notVisibleFbo;
     ofxPostProcessing post;
     std::vector<std::string> hidden;
-    ofxAnimatableFloat displayableAnimation;
+//    ofxAnimatableFloat displayableAnimation;
     void finishedAnimating();
 public:
     typedef shared_ptr<OverlayLayout> Ptr;

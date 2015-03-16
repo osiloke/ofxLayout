@@ -61,18 +61,18 @@ void OverlayLayout::draw(){
 void OverlayLayout::update(){
     FluidLayout::update();
     float dt = 1.0f / ofGetFrameRate();
-    displayableAnimation.update(dt);
+//    displayableAnimation.update(dt);
     
-    if (displayableAnimation.hasFinishedAnimating() ){
+//    if (displayableAnimation.hasFinishedAnimating() ){
         if (_next_visible != ""){
             visible = _next_visible;
             _next_visible = "";
             FluidLayoutMember section = members.at(visible);
             FluidLayout::show(section);
         }
-    }else{
-        pass->setProgress(displayableAnimation.val()); 
-    }
+//    }else{
+//        pass->setProgress(displayableAnimation.val()); 
+//    }
 }
 void OverlayLayout::addChild(Section* section){
     /**
@@ -108,14 +108,14 @@ void OverlayLayout::add(Section &section, float w_percent, float h_percent, floa
 void OverlayLayout::focusChild(Section &section){
     _next_visible = section.key;
     //Do fade animation
-    displayableAnimation.animateFromTo(0.0f, target_p);
+//    displayableAnimation.animateFromTo(0.0f, target_p);
     
 }
 
 void OverlayLayout::deFocusChild(Section &section){
     _next_visible = "";
     //Do fade animation
-    displayableAnimation.animateFromTo(target_p, 0.0f);
+//    displayableAnimation.animateFromTo(target_p, 0.0f);
     
 }
 
@@ -124,7 +124,7 @@ void OverlayLayout::hideChild(Section &section){
     FluidLayout::hide(section);
     visible = "";
     _next_visible = "";
-    displayableAnimation.animateFromTo(target_p, 0.0f);
+//    displayableAnimation.animateFromTo(target_p, 0.0f);
 }
 
 void OverlayLayout::organize(){

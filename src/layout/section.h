@@ -19,6 +19,7 @@
 namespace Kabbou {
     class Section{
     protected:
+        ofImage texture;
         void onPropertyChanged(PropertyEvent & args){};
     public:
         typedef shared_ptr<Section> Ptr;
@@ -138,6 +139,21 @@ namespace Kabbou {
         virtual void setup(int x, int y, int w, int h){}
         
         virtual void handleMessage(ofxJSONElement message){};
+        
+        virtual ofPixelsRef getPixelsRef(){}
+        
+        virtual unsigned char* getPixels(){}
+        virtual ofTexture &getTexture() {}
+        struct Pixels{
+            unsigned char* pixels;
+            int width;
+            int height;
+            int channels;
+            
+        };
+        virtual bool isFrameNew(){
+
+        }
     
     };
 }

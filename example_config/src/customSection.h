@@ -1,13 +1,4 @@
-//
-//  customSection.h
-//  example_config
-//
-//  Created by Osiloke Emoekpere on 9/22/14.
-//
-//
-
-#ifndef __example_config__customSection__
-#define __example_config__customSection__
+#pragma once
 
 #include <iostream>
 #include "sectionFactory.h"
@@ -41,6 +32,4 @@ public:
         ofRect(x, y, w, h);
         ofNoFill();
     };
-};
-
-#endif /* defined(__example_config__customSection__) */
+}; 
