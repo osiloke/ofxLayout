@@ -8,25 +8,24 @@
     "children": [
       {
         "ColumnLayout": {
-          "key": "wrapper",
+          "key": "container",
           "children": [
             {
               "CustomSection": {
-                "key": "stream",
+                "key": "blank",
                 "w_percent": 0.5,
                 "h_percent": 0.5,
                 "halign": "left",
                 "valign": "bottom",
                 "visible": "yes",
                 "color": {
-                  "hex": "0CCCA0"
-                },
-                "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
+                  "hex": "FFF"
+                }
               }
             },
             {
               "VideoSection": {
-                "key": "playlist",
+                "key": "camera",
                 "w_percent": 0.5,
                 "h_percent": 0.5,
                 "halign": "left",
@@ -35,8 +34,7 @@
                 "fill": "yes",
                 "color": {
                   "hex": "56998A"
-                },
-                "streamUrl": "http://10.42.0.72:9981/stream/channelid/8"
+                }
               }
             }
           ]

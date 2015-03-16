@@ -5,6 +5,13 @@ A layout management framework for managing multiple drawable classes in openfram
 
 Requires openframeworks >= v0.8.3
 
+TODO:
+	☐	Respond to window size changes
+	☐	Create layout/section enter and exit animations
+	☐	Fix layout positioning and padding
+	☐	Respond to live changes to layout/section properties
+	☐	Add layout/section mouse events
+
 Depends:
 ofxObservableProperty - https://github.com/osiloke/ofxObservableProperty - An addon for creating variables which can be tracked globally via events. You can listen to changes in an int, bool, string etc property of a class.
 

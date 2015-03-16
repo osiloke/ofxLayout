@@ -1,13 +1,4 @@
-//
-//  section.h
-//  ofxLayout
-//
-//  Created by Osiloke Emoekpere on 3/16/14.
-//
-//
-
-#ifndef signage_section_h
-#define signage_section_h 
+#pragma once
 
 #include "propertyEvent.h"
 #include "intProperty.h"
@@ -176,6 +167,3 @@ namespace Kabbou {
     
     };
 }
-
-
-#endif
