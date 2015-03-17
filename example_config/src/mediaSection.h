@@ -1,13 +1,4 @@
-//
-//  mediaSection.h
-//  example_config
-//
-//  Created by Osiloke Emoekpere on 9/22/14.
-//
-//
-
-#ifndef __example_config__mediaSection__
-#define __example_config__mediaSection__
+#pragma once
 
 #include <iostream>
 #include "sectionFactory.h"
@@ -74,5 +65,4 @@ public:
         ofSetColor(255, 255, 255); 
         videoGrabber.draw(x, y, w, h);
     };
-};
-#endif /* defined(__example_config__mediaSection__) */
+}; 
