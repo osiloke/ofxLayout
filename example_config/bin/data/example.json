@@ -7,34 +7,247 @@
     "y_pos": 0,
     "children": [
       {
-        "ColumnLayout": {
-          "key": "container",
-          "children": [
+        "RowLayout":{
+          "children": [  
             {
-              "CustomSection": {
-                "key": "blank",
-                "w_percent": 0.5,
-                "h_percent": 0.5,
-                "halign": "left",
-                "valign": "bottom",
-                "visible": "yes",
-                "color": {
-                  "hex": "FFF"
-                }
+              "ColumnLayout": {
+                "key": "row01",
+                "h_percent": 0.25, 
+                "children": [
+                  {
+                    "CustomSection": {
+                      "key": "blank",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "83d5f4"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank1",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "d6518e"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank2",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "1a6a92"
+                      }
+                    }
+                  },
+                  {
+                    "VideoSection": {
+                      "key": "camera",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "fill": "yes",
+                      "color": {
+                        "hex": "cccccc"
+                      }
+                    }
+                  }
+                ]
               }
             },
             {
-              "VideoSection": {
-                "key": "camera",
-                "w_percent": 0.5,
-                "h_percent": 0.5,
-                "halign": "left",
-                "valign": "bottom",
-                "visible": "yes",
-                "fill": "yes",
-                "color": {
-                  "hex": "56998A"
-                }
+              "ColumnLayout":{
+                "key": "row100",
+                "h_percent": 0.25,
+                "children": [
+                  {
+                    "CustomSection": {
+                      "key": "blank12",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "374158"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank12",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "1e6d06"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank21",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "ddb719"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank23",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "b6950b"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "ColumnLayout":{
+                "key": "row190",
+                "h_percent": 0.25,
+                "children": [
+                  {
+                    "CustomSection": {
+                      "key": "blank4",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "374158"
+                      }
+                    }
+                  },
+                  {
+                    "VideoSection": {
+                      "key": "blank1",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "1e6d06"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank34",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "ddb719"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank67",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "f37a4b"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "ColumnLayout":{
+                "key": "row180",
+                "h_percent": 0.25,
+                "children": [
+                  {
+                    "CustomSection": {
+                      "key": "blank66",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "f3c247"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank98",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "77ca9e"
+                      }
+                    }
+                  },
+                  {
+                    "CustomSection": {
+                      "key": "blank09",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "bda16d"
+                      }
+                    }
+                  },
+                  {
+                    "VideoSection": {
+                      "key": "blank33",
+                      "w_percent": 0.25,
+                      "h_percent": 0.5,
+                      "halign": "left",
+                      "valign": "bottom",
+                      "visible": "yes",
+                      "color": {
+                        "hex": "f37a4b"
+                      }
+                    }
+                  }
+                ]
               }
             }
           ]

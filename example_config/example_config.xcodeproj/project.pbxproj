@@ -131,7 +131,6 @@
 		3C297F3D19E0CBB9000633ED /* placeholderSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = placeholderSection.cpp; sourceTree = "<group>"; };
 		3C297F3E19E0CBB9000633ED /* placeholderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = placeholderSection.h; sourceTree = "<group>"; };
 		3C39EA8CB1911093FD56F9ED /* HorizontalTiltShifPass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = HorizontalTiltShifPass.h; path = ../../../addons/ofxPostProcessing/src/HorizontalTiltShifPass.h; sourceTree = SOURCE_ROOT; };
-		3C54573642A32801B54F65CE /* manager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = manager.h; path = ../../../addons/ofxLayout/src/layout/manager.h; sourceTree = SOURCE_ROOT; };
 		3C6F3D7419CFBEDC002AA367 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		3C6F3D7519CFBEDC002AA367 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3C6F3D7619CFBEDC002AA367 /* addon_config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addon_config.mk; sourceTree = "<group>"; };
@@ -373,7 +372,6 @@
 				CFB16F8CCCD34118E86A7846 /* factory.h */,
 				3247EB0F487201ECD41358C9 /* layout.cpp */,
 				EC7E2B28ADF3B2B60575177F /* layout.h */,
-				3C54573642A32801B54F65CE /* manager.h */,
 				6BC1A9FCE552D4C52C8EED10 /* overlay.cpp */,
 				4B9B61ADAB1206E79109FCD6 /* overlay.h */,
 				EB4C1C678C7B846CC9C89034 /* parser.h */,

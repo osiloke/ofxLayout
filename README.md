@@ -7,7 +7,7 @@ A layout consists of multiple sections arranged in either rows, columns or overl
 
 ofxLayout uses json documents for defining layouts. You can see an example json doc in the example project. The json doc allows you to specify extra parameters which you can use in configuring a section.
 
-Any existing class can be converted into a section, as long as they implement the setup, update and draw function common to most openframeworks classes. You will also need to register your class as a section using the REGISTERSECTIONIMPL macro. This macro simply tells ofxLayout that it can create a section based on your class. For e.g 
+Any existing class can be converted into a section, as long as they implement the setup, update and draw function common to most openframeworks classes. You will also need to register your class as a section using the REGISTER_SECTION macro. This macro simply tells ofxLayout that it can create a section based on your class. For e.g 
 
 ```
 class WeatherSection: public Section{
