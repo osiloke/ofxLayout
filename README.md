@@ -56,14 +56,14 @@ After doing this, you can use your class in your layout.
 Requires openframeworks >= v0.8.3
 
 # TODO
-	-	[ ] Respond to window size changes
-	-	[ ] Create layout/section enter and exit animations
-	-	[ ] Fix layout positioning and padding
-	-	[ ] Respond to live changes to layout/section properties
-	-	[ ] Add layout/section mouse events
-	-	[ ] Implement some css like attributes (or just use css styles instead of json)
-	-	[ ] Make sections spit out their default attributes via some command
-	-	[ ] Maybe create a layout editor using html5
+- [ ] Respond to window size changes
+- [ ] Create layout/section enter and exit animations
+- [ ] Fix layout positioning and padding
+- [ ] Respond to live changes to layout/section properties
+- [ ] Add layout/section mouse events
+- [ ] Implement some css like attributes (or just use css styles instead of json)
+- [ ] Make sections spit out their default attributes via some command
+- [ ] Maybe create a layout editor using html5
 
 Make a request for a feature.
 

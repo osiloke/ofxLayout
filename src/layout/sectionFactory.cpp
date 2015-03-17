@@ -1,10 +1,4 @@
-//
-//  sectionFactory.cpp
-//  ofxLayout
-//
-//  Created by Osiloke Emoekpere on 9/21/14.
-//
-//
+#pragma once
 
 #include "sectionFactory.h"
 #include "sectionCreator.h"
