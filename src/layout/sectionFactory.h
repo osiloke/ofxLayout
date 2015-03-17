@@ -20,12 +20,13 @@ private:
     static std::map<std::string, SectionCreator*>& get_table();
     static std::map<std::string, Section*>& get_sections();
 public:
-    SectionFactory(){ 
-    };
+    SectionFactory(){};
+    ~SectionFactory();
     static void registerit(const std::string& name, SectionCreator* creator);
     static Section* create(const std::string& name, const std::string& key, const Json::Value& data);
     static Section* getSection(std::string name);
     static bool isRegistered(std::string name);
+    static void clear();
     typedef shared_ptr<SectionFactory> Ptr;
 };
 

@@ -79,6 +79,10 @@ private:
     }
 public:
     LayoutParser(){};
+    ~LayoutParser(){
+        ofLogNotice("ofxLayout::Parser")<<"Destruction";
+        SectionFactory::clear();
+    }
 	LayoutParser(ofxJSONElement config):config(config){};
     void fromJson(Json::Value data){
         config = data;

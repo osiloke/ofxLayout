@@ -392,7 +392,7 @@ namespace ofxLayout {
         };
         
         virtual ~Section() {
-            clearChildren();
+//            clearChildren();
         };
     }; 
 }

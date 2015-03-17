@@ -12,7 +12,10 @@ REGISTER_SECTION(VideoSection);
 public:
     //Minimum constructor needed to use a section, This is assuming you are setting up sections from a section file
     VideoSection(const std::string key, const Json::Value data): Section(key, data){}
-    ~VideoSection(){ofLogNotice("VideoSection")<<"destruct";}
+    ~VideoSection(){
+        ofLogNotice("VideoSection")<<"destruct";
+        videoGrabber.close();
+    }
     int getColor(){
         /**
          Example of using custom arguments from the layout file
