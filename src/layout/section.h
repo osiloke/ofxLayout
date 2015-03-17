@@ -7,7 +7,7 @@
 #include "ofxJSONElement.h" 
 
 
-namespace Kabbou {
+namespace ofxLayout {
     class Section{
     protected:
         ofImage texture;

@@ -8,5 +8,5 @@
 
 #include "customSection.h"
 
-using namespace Kabbou;
+using namespace ofxLayout;
 REGISTERSECTIONIMPL(CustomSection);

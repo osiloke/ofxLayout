@@ -8,5 +8,5 @@
 
 #include "mediaSection.h"
 
-using namespace Kabbou;
+using namespace ofxLayout;
 REGISTERSECTIONIMPL(VideoSection);

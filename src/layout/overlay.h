@@ -16,7 +16,7 @@
 #include "sectionFactory.h"
 #include "ofxPostProcessing.h"
 
-namespace Kabbou{
+namespace ofxLayout{
 class OverlayLayout:public FluidLayout{
 REGISTER_SECTION(OverlayLayout);
     std::string visible;

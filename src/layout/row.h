@@ -4,7 +4,7 @@
 #include <iostream>
 #include "sectionFactory.h"
 
-namespace Kabbou{
+namespace ofxLayout{
     class RowLayout:public FluidLayout{
         REGISTER_SECTION(RowLayout);
     public:
@@ -22,7 +22,7 @@ namespace Kabbou{
             section->onAttachedToParent();
         }
         
-        void add(Kabbou::Section * section, float h_percent=1.0f){
+        void add(ofxLayout::Section * section, float h_percent=1.0f){
             FluidLayout::add(section, 1.0f, h_percent);
         }
         

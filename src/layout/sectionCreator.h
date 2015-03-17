@@ -12,7 +12,7 @@
 #include <iostream>
 #include "section.h"
 
-using namespace Kabbou;
+using namespace ofxLayout;
 class SectionCreator
 {
 public: 

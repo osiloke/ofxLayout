@@ -9,6 +9,6 @@
 #include "layout.h"
 
 
-using namespace Kabbou;
+using namespace ofxLayout;
 
 const SectionCreatorImpl<FluidLayout> FluidLayout::creator("FluidLayout"); 

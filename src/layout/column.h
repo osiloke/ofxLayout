@@ -13,7 +13,7 @@
 #include <iostream>
 #include "sectionFactory.h"
 
-namespace Kabbou{
+namespace ofxLayout{
     class ColumnLayout:public FluidLayout{
     REGISTER_SECTION(ColumnLayout);
     public:

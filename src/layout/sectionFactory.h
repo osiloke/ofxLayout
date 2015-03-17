@@ -13,7 +13,7 @@
 #include "sectionImpl.h"
 
 #include "section.h"
-using namespace Kabbou;
+using namespace ofxLayout;
 
 class SectionFactory{
 private:  

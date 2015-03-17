@@ -8,7 +8,7 @@
 #include "propertyEvent.h"
 #include "sectionFactory.h"
 
-namespace Kabbou{ 
+namespace ofxLayout{ 
     class FluidLayout: public Section{
     private:
         static const SectionCreatorImpl<FluidLayout> creator;

@@ -9,7 +9,7 @@
 #include "overlay.h"
 
 
-using namespace Kabbou;
+using namespace ofxLayout;
 REGISTERSECTIONIMPL(OverlayLayout);
 FadeBlack::Ptr pass;
 float target_p = 10.0f;

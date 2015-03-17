@@ -16,7 +16,7 @@
 #include "section.h"
 #include "sectionCreator.h"
 
-using namespace Kabbou;
+using namespace ofxLayout;
 
 template <class T>
 class SectionCreatorImpl: public SectionCreator
