@@ -22,30 +22,15 @@ namespace ofxLayout{
         FluidLayout():Section("layout"){
         }
         
-        
-        
-        void conceal(){
-            if(this->parent)
-                this->parent->hideChild(this);
+        ~FluidLayout()
+        {
+            ofLogNotice()<<"Fluid layout destructor";
         }
-        void reveal(){
-            if(this->parent)
-                this->parent->showChild(this);
-        }
-        
-//        void focus(){
-//            if(this->parent)
-//                this->parent->focusChild(this);
-//        }
-//        
-        void deFocus(){
-            if(this->parent)
-                this->parent->deFocusChild(this);
-        } 
         
         virtual std::string getType(){
             return "Fluid Layout";
         }
+        
     };
     
 } 

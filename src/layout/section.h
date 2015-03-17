@@ -87,16 +87,8 @@ namespace ofxLayout {
             this->r_h_p = h_p;
             this->r_p_p = p_p;
             updateItem(x, y, w, h);
-        }
-        
-//        virtual void setup(){} 
-//        virtual void setup(int x, int y, int w, int h){}
-//        virtual void update(){}
-//        virtual void draw(int x, int y){}
-        virtual void draw(int x, int y, int w, int h){}
-//        virtual void draw(){
-//            draw(X(), Y(), Width(), Height());
-//        }        
+        } 
+        virtual void draw(int x, int y, int w, int h){} 
         virtual ofPixelsRef getPixelsRef(){}
         virtual unsigned char* getPixels(){}
         virtual ofTexture &getTexture() {}
@@ -361,7 +353,29 @@ namespace ofxLayout {
             t_x = t_x + w_p;
             t_y = t_y + h_p;
         }
-
+        
+        
+        
+        
+        
+        void conceal(){
+            if(this->parent)
+                this->parent->hideChild(this);
+        }
+        void reveal(){
+            if(this->parent)
+                this->parent->showChild(this);
+        }
+        
+        void focus(){
+            if(this->parent)
+                this->parent->focusChild(this);
+        }
+        //
+        void deFocus(){
+            if(this->parent)
+                this->parent->deFocusChild(this);
+        }
         
         virtual void clearChildren() {
             std::map<std::string, Section *>::iterator it_current;
@@ -377,7 +391,7 @@ namespace ofxLayout {
             displayable.clear();
         };
         
-        ~Section() {
+        virtual ~Section() {
             clearChildren();
         };
     }; 
