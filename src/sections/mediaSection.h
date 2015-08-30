@@ -56,14 +56,13 @@ public:
     void update(){
         videoGrabber.update();
     } 
-    void draw(int x, int y, int w, int h){
-        //Draw whatever here, the x, y, w and h are handled by the parent section
-        //Use our color variable to set border color
+    void draw(){
+        int x = X(), y = Y(), w = Width(), h = Height();
         ofSetHexColor(getColor());
         ofNoFill();
-        ofRect(x, y, w, h);
-        ofSetColor(255, 255, 255); 
-        videoGrabber.draw(x, y, w, h);
-    };
+        ofDrawRectangle(x, y, w, w*480/720);
+        ofSetColor(255, 255, 255);
+        videoGrabber.draw(x, y, w, w*480/720);
+    }
 };
 #endif /* defined(__signage__mediaSection__) */

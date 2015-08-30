@@ -10,20 +10,14 @@
 
 
 using namespace ofxLayout;
-REGISTERSECTIONIMPL(OverlayLayout);
-FadeBlack::Ptr pass;
+REGISTERSECTIONIMPL(OverlayLayout); 
 float target_p = 10.0f;
 
 void OverlayLayout::setup(){
     FluidLayout::setup();
     int x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt(),
     w = width.getValue().asInt(),h = height.getValue().asInt();
-    
-    post.init(w, h);
-    pass = post.createPass<FadeBlack>();
-    pass->setProgress(target_p);
-    pass->setResolution(ofVec2f(w, h));
-    pass->setEnabled(true);
+     
     
 }
 
@@ -35,16 +29,14 @@ void OverlayLayout::draw(){
     // copy enable part of gl state
     glPushAttrib(GL_ENABLE_BIT);
     
-    if(visible != ""){
-        post.begin();
+    if(visible != ""){ 
         for ( it = displayable.rbegin(); it != displayable.rend(); it++){
             if(*it != visible)
             {
                 Section * section = members.at((*it));
                 section->draw(section->X(), section->Y(), section->Width(), section->Height());
             } 
-        }
-        post.end();
+        } 
         
         Section * section = members.at((visible));
         section->draw();
@@ -78,11 +70,7 @@ void OverlayLayout::addChild(Section* section){
     /**
      Add a child section/layout
      **/
-    Json::Value props = section->getData();
-    this->add(section, props);
-    section->onAttachedToParent();
-}
-void OverlayLayout::add(Section * section, ofxJSONElement props){
+    Json::Value props = section->getData(); 
     std::string halign = props.get("halign", "left").asString();
     std::string valign = props.get("valign", "bottom").asString();
     
@@ -97,14 +85,23 @@ void OverlayLayout::add(Section * section, ofxJSONElement props){
     if(halign == "center"){
         padding = padding + 1.0f - w_percent;
     }
+    /*
+     t_h = derived height from y_percent
+     cum_height = next y pos
+     cum_width = next x pos
+     cum_height = 0
+     cum_height = h - (h - cum_height - (t_h))
+     */ 
+    int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
     
-    FluidLayout::add(section, w_percent, h_percent, padding);
+    calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
+    updateMaxPos(t_w, t_h);
+    
+    calculatePadding(t_x, t_y, t_w, t_h, padding);
+    
+    FluidLayout::add(section, t_x, t_y, t_w, t_h);
 }
 
-void OverlayLayout::add(Section * section, float w_percent, float h_percent, float padding){
-    FluidLayout::add(section, w_percent, h_percent, padding);
-//    visible = section.key;
-}
 
 void OverlayLayout::focusChild(Section * section){
     _next_visible = section->key;
@@ -129,11 +126,9 @@ void OverlayLayout::hideChild(Section * section){
 }
 
 void OverlayLayout::organize(){
-    FluidLayout::organize();
-    int x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt(),
-    w = width.getValue().asInt(),h = height.getValue().asInt();
-    
-    post.init(w, h); 
+//    FluidLayout::organize();
+//    int x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt(),
+//    w = width.getValue().asInt(),h = height.getValue().asInt();
     
 }
 

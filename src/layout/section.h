@@ -25,9 +25,21 @@ namespace ofxLayout {
         std::vector<std::string> displayable; //stores displayable sections, it is ordered by the position of sections in the members map;
         std::vector<std::string>::iterator it_displayable;
         std::map<std::string, std::vector<std::string>::iterator> member_index;
+        void _setup_interaction(){
+            _isMouseOver	= false;
+            enabled		= true;
+            verbose		= true;
+            _stateChangeTimestampMillis = 0;
+
+//            enableAppEvents();
+            disableMouseEvents();
+            disableKeyEvents();
+        }
+
     public:
         typedef shared_ptr<Section> Ptr;
         virtual Section* create(){};
+
         IntProperty width;
         IntProperty height;
         IntProperty x_pos;
@@ -36,25 +48,28 @@ namespace ofxLayout {
         Section * parent;
         std::string key;
         Json::Value data;
-        float h_p, w_p, r_h_p, r_w_p, p_p, r_p_p;
         
-        Section(){};
+
+        Section(){
+            _setup_interaction();
+        };
         Section(std::string key)
         :key(key), x_pos(key + ".x"), y_pos(key + ".y"),
         width(key + ".width"), height(key + ".height"),
         b_displayed(key + ".displayed", false)
         {
             data["name"] = key;
+            _setup_interaction();
         };
         
-        Section(std::string key, Json::Value data):
+        Section(std::string key, ofxJSONElement data):
         key(key), x_pos(key + ".x"),
         y_pos(key + ".y"),
         width(key + ".width"),
         height(key + ".height"),
         b_displayed(key + ".displayed", false),
         data(data){
-            
+            _setup_interaction();
         }
         
         int X(){
@@ -79,16 +94,7 @@ namespace ofxLayout {
             this->width.setValue(w);
             this->height.setValue(h);
         }
-        void setCalculatedValues(int w, int h, int x, int y, float w_p, float h_p, float p_p){
-            this->w_p = w_p;
-            this->h_p = h_p;
-            this->p_p = p_p;
-            this->r_w_p = w_p;
-            this->r_h_p = h_p;
-            this->r_p_p = p_p;
-            updateItem(x, y, w, h);
-        } 
-        virtual void draw(int x, int y, int w, int h){} 
+
         virtual ofPixelsRef getPixelsRef(){}
         virtual unsigned char* getPixels(){}
         virtual ofTexture &getTexture() {}
@@ -103,9 +109,6 @@ namespace ofxLayout {
         virtual bool isFrameNew(){}
         
         void reset(){
-            w_p = r_w_p;
-            h_p = r_h_p;
-            p_p = r_p_p;
         }
         
         void setDataAttribute(std::string key, ofxJSONElement val){
@@ -140,12 +143,12 @@ namespace ofxLayout {
             this->width.setValue(w);
             this->height.setValue(h);
             setup();
-            ofLogNotice()<<"Setup "<<key<<width.getValue()<<" by "<<height.getValue();
         }
         
         virtual void setup(){
             resetMaxPosition();
             it_displayable = displayable.begin();
+            ofLogNotice()<<"Setup "<<key<<width.getValue()<<" by "<<height.getValue();
         }
         
         virtual void update(){
@@ -181,23 +184,34 @@ namespace ofxLayout {
                 }
             }
         }
-                
-        virtual void add(Section *section, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f){
-            /*
-             t_h = derived height from y_percent
-             cum_height = next y pos
-             cum_width = next x pos
-             cum_height = 0
-             cum_height = h - (h - cum_height - (t_h))
-             */
-            int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
-            
-            calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
-            updateMaxPos(t_w, t_h);
-            
-            calculatePadding(t_x, t_y, t_w, t_h, padding);
-            
-            section->setCalculatedValues(t_w, t_h, t_x, t_y, w_percent, h_percent, padding);
+        virtual void draw(int x, int y, int w, int h){}
+
+//        virtual void organize(){
+//            //Re calculate placement for each item
+//            this->resetMaxPosition();
+//            int h = this->height.getValue().asInt(), w = this->width.getValue().asInt(), x = this->x_pos.getValue().asInt(), y = this->y_pos.getValue().asInt();
+
+//            ofLogNotice(this->getType())<<this->displayable.size()<<" sections will be organized";
+//            std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
+
+//            for ( it = this->displayable.rbegin(); it != this->displayable.rend(); it++){
+//                int t_x = this->cum_width, t_y = this->cum_height, t_w, t_h;
+
+//                Section * section = this->members.at((*it));
+//                this->calcTargets(section->w_p, section->h_p, section->p_p, t_x, t_y, t_w, t_h);
+//                this->updateMaxPos(t_w, t_h);
+
+//                this->calculatePadding(t_x, t_y, t_w, t_h, section->p_p);
+//                section->updateItem(t_x, t_y, t_w, t_h);
+//                section->organize();
+//                ofLogNotice(" ==> " + section->key)<<" has been organized";
+//            }
+//        }
+
+        virtual void exit() {}      // called when app quites
+        virtual void add(Section *section, int x, int y, int w, int h){
+            ofLogNotice()<<"Placed "<<section->key<<" at "<<x<<","<<y<<","<<w<<","<<h;
+            section->updateItem(x, y, w, h);
             
             this->members.insert(std::pair<std::string, Section *>(section->key, section));
             
@@ -207,20 +221,20 @@ namespace ofxLayout {
             
             ofLogNotice(this->getType())<<"[Section] "<<section->key<<" added";
             ofLogNotice(this->getType())<<this->displayable.size()<<" displayable section(s)";
-            
-            this->showChild(section);
-        };
-        
+
+            showChild(section);
+            section->onAttachedToParent();
+        };        
         
         virtual void addChild(Section* section){
             /**
              Add a child section/layout
              **/
             Json::Value props = section->getData();
-            add(section, props.get("w_percent", 1.0f).asFloat(),
-                props.get("h_percent", 1.0f).asFloat(),
-                props.get("padding", 0.0f).asFloat());
-            section->onAttachedToParent();
+            int w = props.get("width", Width() ).asInt();
+            int h = props.get("height", Height() ).asInt();
+            int x = X(), y = Y();
+            add(section, x, y, w, h);
         }
         
         virtual void removeChild(Section* section){}
@@ -254,40 +268,20 @@ namespace ofxLayout {
         virtual void focusChild(Section* section){}
         
         virtual void deFocusChild(Section* section){}
-        virtual void organize(){
-            //Re calculate placement for each item
-            this->resetMaxPosition();
-            int h = this->height.getValue().asInt(), w = this->width.getValue().asInt(), x = this->x_pos.getValue().asInt(), y = this->y_pos.getValue().asInt();
-            
-            ofLogNotice(this->getType())<<this->displayable.size()<<" sections will be organized";
-            std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
-            
-            for ( it = this->displayable.rbegin(); it != this->displayable.rend(); it++){
-                int t_x = this->cum_width, t_y = this->cum_height, t_w, t_h;
-                
-                Section * section = this->members.at((*it));
-                this->calcTargets(section->w_p, section->h_p, section->p_p, t_x, t_y, t_w, t_h);
-                this->updateMaxPos(t_w, t_h);
-                
-                this->calculatePadding(t_x, t_y, t_w, t_h, section->p_p);
-                section->updateItem(t_x, t_y, t_w, t_h);
-                section->organize();
-                ofLogNotice(" ==> " + section->key)<<" has been organized";
-            }
-        }
         
         virtual void changeRatio(Section * section, float w_percent=0.0f, float h_percent=0.0f){
             changeRatio(section->key, w_percent, h_percent);
         }
+        virtual void changeRatio(std::string section, float w_percent=0.0f, float h_percent=0.0f){};
         
-        virtual void changeRatio(std::string section, float w_percent=0.0f, float h_percent=0.0f){
-            std::map<std::string, Section *>::iterator it = members.find( section );
-            if( it != members.end() )
-            {
-                (*it).second->w_p = w_percent;
-                (*it).second->h_p = h_percent;
-            }
-        }
+//        virtual void changeRatio(std::string section, float w_percent=0.0f, float h_percent=0.0f){
+//            std::map<std::string, Section *>::iterator it = members.find( section );
+//            if( it != members.end() )
+//            {
+//                (*it).second->w_p = w_percent;
+//                (*it).second->h_p = h_percent;
+//            }
+//        }
         
         virtual void resetSection(std::string section){
             std::map<std::string, Section *>::iterator it = members.find( section );
@@ -353,11 +347,7 @@ namespace ofxLayout {
             t_x = t_x + w_p;
             t_y = t_y + h_p;
         }
-        
-        
-        
-        
-        
+          
         void conceal(){
             if(this->parent)
                 this->parent->hideChild(this);
@@ -394,5 +384,84 @@ namespace ofxLayout {
         virtual ~Section() {
 //            clearChildren();
         };
+
+//Interaction, no holds barred lift off of ofxMSAInteractiveObject
+        bool		enabled;				// set this to false to temporarily disable all events
+        bool		verbose;
+
+        void enableAllEvents();				// enable all event callbacks
+        void disableAllEvents();			// disable all event callbacks
+
+        void enableMouseEvents();			// call this if object should receive mouse events
+        void disableMouseEvents();			// call this if object doesn't need to receive mouse events (default)
+
+        void enableKeyEvents();				// call this if object should receive key events
+        void disableKeyEvents();			// call this if object doesn't need to receive key events (default)
+
+        void enableAppEvents();				// call this if object should update/draw automatically	(default)
+        void disableAppEvents();			// call this if object doesn't need to update/draw automatically
+
+
+    //	void setPosition(float _x, float _y);	// replaced with ofRectangle::setPosition
+        void setSize(float _w, float _h);	// set size of object
+    //	void setPosAndSize(float _x, float _y, float _w, float _h);		// replaced with ofRectangle::set
+
+
+        bool isMouseOver() const;                     // returns true if mouse is over object (based on position and size)
+        bool isMousePressed(int mouseButton=0) const;    // returns true if mouse button is down and was pressed over object (based on position and size)
+
+
+        int	 getMouseX() const;                       // returns mouse X (in screen coordinates)
+        int  getMouseY() const;                       // returns mouse Y (in screen coordinates)
+
+        unsigned long getStateChangeMillis() const;   // returns milliseconds since last state change
+
+        virtual bool hitTest(int tx, int ty);		// returns true if given (x, y) coordinates (in screen space) are over the object (based on position and size)
+
+
+        // these behave very similar to those in flash
+        virtual void onRollOver(int x, int y) {}                    // called when mouse enters object x, y, width, height
+        virtual void onRollOut() {}                                 // called when mouse leaves object x, y, width, height
+        virtual void onMouseMove(int x, int y) {}                   // called when mouse moves while over object x, y, width, height
+        virtual void onDragOver(int x, int y, int button) {}        // called when mouse moves while over object and button is down
+        virtual void onDragOutside(int x, int y, int button) {}     // called when mouse moves while outside the object after being clicked on it
+        virtual void onPress(int x, int y, int button) {}           // called when mouse presses while over object
+        virtual void onPressOutside(int x, int y, int button) {}    // called when mouse presses while outside object
+        virtual void onRelease(int x, int y, int button) {}         // called when mouse releases while over object
+        virtual void onReleaseOutside(int x, int y, int button) {}  // called when mouse releases outside of object after being pressed on object
+        virtual void onKeyPress(int key) {}                         // called when keypressed while mouse over the object
+        virtual void onKeyRelease(int key) {}                        // called when keyreleased while mouse over the object
+
+
+        // these are called when the relevant event occurs without caring where it actually happened
+        // i.e. its the raw event
+        virtual void mouseMoved(int x, int y) {}                     // called when mouse moves anywhere
+        virtual void mousePressed(int x, int y, int button) {}       // called when mouse pressed anywhere
+        virtual void mouseDragged(int x, int y, int button) {}       // called when mouse dragged anywhere
+        virtual void mouseReleased(int x, int y, int button) {}      // called when mouse released anywhere
+
+        virtual void keyPressed(int key) {}                          // called when keypressed anywhere
+        virtual void keyReleased(int key) {}                         // called when keyreleased anywhere
+
+
+        // you shouldn't need access to any of these unless you know what you are doing
+        // (i.e. disable auto updates and call these manually)
+        void _setup(ofEventArgs &e);
+        void _update(ofEventArgs &e);
+        void _draw(ofEventArgs &e);
+        void _exit(ofEventArgs &e);
+
+        void _mouseMoved(ofMouseEventArgs &e);
+        void _mousePressed(ofMouseEventArgs &e);
+        void _mouseDragged(ofMouseEventArgs &e);
+        void _mouseReleased(ofMouseEventArgs &e);
+
+        void _keyPressed(ofKeyEventArgs &e);
+        void _keyReleased(ofKeyEventArgs &e);
+private:
+        bool            _isMouseOver;       // is mouse over the rect
+        map<int, bool>    _isMousePressed;       // is mouse down over the rect (for any given mouse button)
+        unsigned long   _stateChangeTimestampMillis;
+        ofRectangle	oldRect;
     }; 
 }

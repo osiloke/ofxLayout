@@ -1,16 +1,5 @@
-//
-//  column.h
-//  signage
-//
-//  A column layout places objects horizontally i.e Members always have max height
-//  Created by Osiloke Emoekpere on 4/17/14.
-//
-//
-
-#ifndef __signage__column__
-#define __signage__column__
+#pragma once
 #include "layout.h"
-#include <iostream>
 #include "sectionFactory.h"
 
 namespace ofxLayout{
@@ -22,16 +11,7 @@ namespace ofxLayout{
         ColumnLayout(std::string key): FluidLayout(key){};
         ColumnLayout(): FluidLayout("column"){};
          
-        void addChild(Section * section){
-            /**
-             Add a child section/layout
-             **/
-            Json::Value props = section->getData();
-            this->add(section, props.get("w_percent", 1.0f).asFloat());
-            section->onAttachedToParent();
-        }
-
-        void add(Section *section, float w_percent=1.0f, float padding=0.0f);
+        void addChild(Section * section);
         
         void changeRatio(Section *section, float w_percent=0.0f);
         void changeRatio(std::string section, float w_percent=0.0f);
@@ -47,4 +27,3 @@ namespace ofxLayout{
         }
     };
 };
-#endif /* defined(__signage__column__) */
