@@ -3,8 +3,29 @@
 
 REGISTERSECTIONIMPL(ColumnLayout);
 
-void ColumnLayout::add(Section *section, float w_percent, float padding){
-    FluidLayout::add(section, w_percent, 1.0f, padding);
+void ColumnLayout::addChild(Section *section){ 
+    /**
+     Add a child section/layout
+     **/
+    Json::Value props = section->getData();
+    /*
+     t_h = derived height from y_percent
+     cum_height = next y pos
+     cum_width = next x pos
+     cum_height = 0
+     cum_height = h - (h - cum_height - (t_h))
+     */
+    float w_percent = props.get("w_percent", 1.0f).asFloat();
+    float h_percent = 1.0f;
+    float padding = props.get("padding", 0.0f).asFloat();
+    int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
+    
+    calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
+    updateMaxPos(t_w, t_h);
+    
+    calculatePadding(t_x, t_y, t_w, t_h, padding);
+    
+    FluidLayout::add(section, t_x, t_y, t_w, t_h); 
 }
 
 void ColumnLayout::changeRatio(Section *section, float w_percent){

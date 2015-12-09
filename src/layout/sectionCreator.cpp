@@ -3,6 +3,7 @@
 
 SectionCreator::SectionCreator(std::string name)
 {
+    this->name = name;
     SectionCreator* p(this);
 	SectionFactory::registerit(name, p);
 }

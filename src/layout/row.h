@@ -16,15 +16,27 @@ namespace ofxLayout{
         void addChild(Section * section){
             /**
              Add a child section/layout
-             **/
+             **/ 
             Json::Value props = section->getData();
-            this->add(section, props.get("h_percent", 1.0f).asFloat());
-            section->onAttachedToParent();
-        }
-        
-        void add(ofxLayout::Section * section, float h_percent=1.0f){
-            FluidLayout::add(section, 1.0f, h_percent);
-        }
+            /*
+             t_h = derived height from y_percent
+             cum_height = next y pos
+             cum_width = next x pos
+             cum_height = 0
+             cum_height = h - (h - cum_height - (t_h))
+             */
+            float w_percent = 1.0f;
+            float h_percent = props.get("h_percent", 1.0f).asFloat();
+            float padding = props.get("padding", 0.0f).asFloat();
+            int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
+            
+            calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
+            updateMaxPos(t_w, t_h);
+            
+            calculatePadding(t_x, t_y, t_w, t_h, padding);
+            
+            FluidLayout::add(section, t_x, t_y, t_w, t_h);
+        } 
         
         void changeRatio(Section &section, float h_percent=0.0f){
             changeRatio(section.key, h_percent);

@@ -79,16 +79,15 @@ namespace ofxLayout {
             this->width.setValue(w);
             this->height.setValue(h);
         }
-        void setCalculatedValues(int w, int h, int x, int y, float w_p, float h_p, float p_p){
-            this->w_p = w_p;
-            this->h_p = h_p;
-            this->p_p = p_p;
-            this->r_w_p = w_p;
-            this->r_h_p = h_p;
-            this->r_p_p = p_p;
-            updateItem(x, y, w, h);
-        } 
-        virtual void draw(int x, int y, int w, int h){} 
+//        void setCalculatedValues(int w, int h, int x, int y, float w_p, float h_p, float p_p){
+//            this->w_p = w_p;
+//            this->h_p = h_p;
+//            this->p_p = p_p;
+//            this->r_w_p = w_p;
+//            this->r_h_p = h_p;
+//            this->r_p_p = p_p;
+//            updateItem(x, y, w, h);
+//        } 
         virtual ofPixelsRef getPixelsRef(){}
         virtual unsigned char* getPixels(){}
         virtual ofTexture &getTexture() {}
@@ -181,23 +180,11 @@ namespace ofxLayout {
                 }
             }
         }
+        virtual void draw(int x, int y, int w, int h){}
                 
-        virtual void add(Section *section, float w_percent=1.0f, float h_percent=1.0f, float padding=0.0f){
-            /*
-             t_h = derived height from y_percent
-             cum_height = next y pos
-             cum_width = next x pos
-             cum_height = 0
-             cum_height = h - (h - cum_height - (t_h))
-             */
-            int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
-            
-            calcTargets(w_percent, h_percent, padding, t_x, t_y, t_w, t_h);
-            updateMaxPos(t_w, t_h);
-            
-            calculatePadding(t_x, t_y, t_w, t_h, padding);
-            
-            section->setCalculatedValues(t_w, t_h, t_x, t_y, w_percent, h_percent, padding);
+        virtual void add(Section *section, int t_x, int t_y, int t_w, int t_h){ 
+            ofLogNotice()<<"Placed "<<section->key<<" at "<<t_x<<","<<t_y<<","<<t_w<<","<<t_h;
+            section->updateItem(t_w, t_h, t_x, t_y);
             
             this->members.insert(std::pair<std::string, Section *>(section->key, section));
             
@@ -208,7 +195,8 @@ namespace ofxLayout {
             ofLogNotice(this->getType())<<"[Section] "<<section->key<<" added";
             ofLogNotice(this->getType())<<this->displayable.size()<<" displayable section(s)";
             
-            this->showChild(section);
+            section->onAttachedToParent();
+            showChild(section);
         };
         
         
@@ -217,10 +205,10 @@ namespace ofxLayout {
              Add a child section/layout
              **/
             Json::Value props = section->getData();
-            add(section, props.get("w_percent", 1.0f).asFloat(),
-                props.get("h_percent", 1.0f).asFloat(),
-                props.get("padding", 0.0f).asFloat());
-            section->onAttachedToParent();
+            int w = props.get("width", Width() ).asInt();
+            int h = props.get("height", Height() ).asInt();
+            int x = X(), y = Y();
+            add(section, x, y, w, h);
         }
         
         virtual void removeChild(Section* section){}
@@ -353,11 +341,7 @@ namespace ofxLayout {
             t_x = t_x + w_p;
             t_y = t_y + h_p;
         }
-        
-        
-        
-        
-        
+          
         void conceal(){
             if(this->parent)
                 this->parent->hideChild(this);

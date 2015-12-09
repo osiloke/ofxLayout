@@ -14,7 +14,7 @@ class SectionCreatorImpl: public SectionCreator
 {
 public: 
 	SectionCreatorImpl<T>(std::string name): SectionCreator(name) {}
-    virtual ~SectionCreatorImpl<T>() {ofLogNotice("ofxLayout::SectionCreatorImpl ")<<"Destruction";}
+    virtual ~SectionCreatorImpl<T>() {}
     virtual Section* create(const std::string key, const Json::Value data) {
 //        Section* p( new T(key, data));
         return new T(key, data);

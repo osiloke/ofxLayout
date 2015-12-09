@@ -61,9 +61,9 @@ public:
         //Use our color variable to set border color
         ofSetHexColor(getColor());
         ofNoFill();
-        ofRect(x, y, w, h);
+        ofRect(x, y, w, w*480/720);
         ofSetColor(255, 255, 255); 
-        videoGrabber.draw(x, y, w, h);
+        videoGrabber.draw(x, y, w, w*480/720);
     };
 };
 #endif /* defined(__signage__mediaSection__) */
