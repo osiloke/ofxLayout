@@ -7,12 +7,12 @@
     "y_pos": 0,
     "children": [
       {
-        "RowLayout":{
-          "children": [  
+        "RowLayout": {
+          "children": [
             {
               "ColumnLayout": {
                 "key": "row01",
-                "h_percent": 0.25, 
+                "h_percent": 0.25,
                 "children": [
                   {
                     "CustomSection": {
@@ -71,7 +71,7 @@
               }
             },
             {
-              "ColumnLayout":{
+              "ColumnLayout": {
                 "key": "row100",
                 "h_percent": 0.25,
                 "children": [
@@ -131,7 +131,7 @@
               }
             },
             {
-              "ColumnLayout":{
+              "ColumnLayout": {
                 "key": "row190",
                 "h_percent": 0.25,
                 "children": [
@@ -191,7 +191,7 @@
               }
             },
             {
-              "ColumnLayout":{
+              "ColumnLayout": {
                 "key": "row180",
                 "h_percent": 0.25,
                 "children": [
