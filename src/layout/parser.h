@@ -24,12 +24,14 @@ private:
 			int width = 0, height = 0;
 			if (s_width.find("Window") != std::string::npos) {
 				width = ofGetWidth();
+				rootLayout->matchesWindowWidth = true;
 			} else {
 				width = atoi(s_width.c_str());
 			}
 
 			if (s_height.find("Window") != std::string::npos) {
 				height = ofGetHeight();
+				rootLayout->matchesWindowHeight = true;
 			} else {
 				height = atoi(s_height.c_str());
 			}

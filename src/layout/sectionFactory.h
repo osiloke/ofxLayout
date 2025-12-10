@@ -27,6 +27,7 @@ public:
     static Section* getSection(std::string name);
     static bool isRegistered(std::string name);
     static void clear();
+    static void handleWindowResize(int w, int h);
     typedef shared_ptr<SectionFactory> Ptr;
 };
 

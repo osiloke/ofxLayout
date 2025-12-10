@@ -44,6 +44,8 @@ public:
 	std::string key;
 	Json::Value data;
 	float h_p, w_p, r_h_p, r_w_p, p_p, r_p_p;
+    bool matchesWindowWidth, matchesWindowHeight;
+    bool isListeningToResize;
 
 	Section()
 		: h_p(0.0f)
@@ -51,7 +53,10 @@ public:
 		, r_h_p(0.0f)
 		, r_w_p(0.0f)
 		, p_p(0.0f)
-		, r_p_p(0.0f) { };
+		, r_p_p(0.0f)
+        , matchesWindowWidth(false)
+        , matchesWindowHeight(false)
+        , isListeningToResize(false){ };
 	Section(std::string key)
 		: key(key)
 		, x_pos(key + ".x")
@@ -64,7 +69,10 @@ public:
 		, r_h_p(0.0f)
 		, r_w_p(0.0f)
 		, p_p(0.0f)
-		, r_p_p(0.0f) {
+		, r_p_p(0.0f)
+        , matchesWindowWidth(false)
+        , matchesWindowHeight(false)
+        , isListeningToResize(false){
 		data["name"] = key;
 	};
 
@@ -81,7 +89,10 @@ public:
 		, r_h_p(0.0f)
 		, r_w_p(0.0f)
 		, p_p(0.0f)
-		, r_p_p(0.0f) {
+		, r_p_p(0.0f)
+        , matchesWindowWidth(false)
+        , matchesWindowHeight(false)
+        , isListeningToResize(false){
 	}
 
 	int X() {
@@ -178,7 +189,26 @@ public:
 	virtual void setup() {
 		resetMaxPosition();
 		it_displayable = displayable.begin();
+        if(!isListeningToResize && (matchesWindowWidth || matchesWindowHeight)){
+            ofAddListener(ofEvents().windowResized, this, &Section::_windowResized);
+            isListeningToResize = true;
+        }
 	}
+    
+    void _windowResized(ofResizeEventArgs & args){
+         bool changed = false;
+         if(matchesWindowWidth){
+             this->width.setValue(args.width);
+             changed = true;
+         }
+         if(matchesWindowHeight){
+             this->height.setValue(args.height);
+             changed = true;
+         }
+         if(changed){
+             this->organize();
+         }
+    }
 
 	virtual void update() {
 		std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
@@ -433,6 +463,9 @@ public:
 	};
 
 	virtual ~Section() {
+        if(isListeningToResize){
+            ofRemoveListener(ofEvents().windowResized, this, &Section::_windowResized);
+        }
 		//            clearChildren();
 	};
 };

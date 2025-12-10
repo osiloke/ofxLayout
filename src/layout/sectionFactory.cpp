@@ -67,3 +67,21 @@ void SectionFactory::clear(){
     }
     get_sections().clear(); 
 }
+
+void SectionFactory::handleWindowResize(int w, int h){
+    for(auto& pair : get_sections()){
+        Section* s = pair.second;
+        bool changed = false;
+        if(s->matchesWindowWidth){
+            s->width.setValue(w);
+            changed = true;
+        }
+        if(s->matchesWindowHeight){
+            s->height.setValue(h);
+            changed = true;
+        }
+        if(changed){
+            s->organize();
+        }
+    }
+}
