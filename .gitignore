@@ -1,2 +1,67 @@
+# Compiled Object files
+build/
+
+# macOS
+.DS_Store
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Windows
+*.vcxproj.user
+*.suo
+*.aps
+*.user
+*.ilk
+*.pdb
+*.obj
+*.o
+*.lo
+*.la
+*.lib
+*.dll
+*.exp
+*.lst
+*.com
+*.exe
+*.map
+*.bak
+*.pyc
+*.pyo
+
+# Linux
+*.depend
+*.d
+*.o
+*.os
+*.so
+*.so.*
+*.a
+*.lo
+*.la
+*.ko
+*.mod.c
+*.mod
+*.symvers
+*.cmd
+
+# openFrameworks specific
+*.xcode/
+*.vs/
+*.codeblocks/
+*.creator/
+*.pro.user
+*.qbs/
+*.autosave
+.ofproject
+
+# General
+.history/
+*~
+*.log
+*.tmp
+.lock-waf*
+.waf-*
+
+# ofxLayout specific
 *._*.cpp
 *._*.h
