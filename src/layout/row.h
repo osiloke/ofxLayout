@@ -17,23 +17,28 @@ public:
 	RowLayout()
 		: FluidLayout("row") { };
 
+	/**
+	 * @brief Adds a child section to the RowLayout.
+	 *
+	 * In a RowLayout, children are arranged horizontally.
+	 * The height is forced to 100% (1.0f) relative to the parent,
+	 * and the width is determined by the 'w_percent' property of the child.
+	 *
+	 * @param section Pointer to the child section to be added.
+	 */
 	void addChild(Section * section) {
-		/**
-             Add a child section/layout
-             **/
 		Json::Value props = section->getData();
-		/*
-             t_h = derived height from y_percent
-             cum_height = next y pos
-             cum_width = next x pos
-             cum_height = 0
-             cum_height = h - (h - cum_height - (t_h))
-             */
-		float w_percent = 1.0f;
-		float h_percent = props.get("h_percent", 1.0f).asFloat();
+
+		// t_w = derived width from w_percent
+		// cum_width = next x pos (horizontal stacking)
+		// cum_height = y pos (always starts at 0 relative to parent)
+
+		float w_percent = props.get("w_percent", 1.0f).asFloat(); // Width is variable
+		float h_percent = 1.0f; // Height is always 100%
 		float padding = props.get("padding", 0.0f).asFloat();
 		int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
 
+		// Store original properties for resetting or organizing later
 		section->w_p = w_percent;
 		section->h_p = h_percent;
 		section->p_p = padding;
@@ -49,26 +54,85 @@ public:
 		FluidLayout::add(section, t_x, t_y, t_w, t_h);
 	}
 
-	void changeRatio(Section & section, float h_percent = 0.0f) {
-		changeRatio(section.key, h_percent);
+	/**
+	 * @brief Changes the width ratio of a specific section.
+	 *
+	 * @param section Pointer to the section to modify.
+	 * @param w_percent New width percentage (0.0 to 1.0).
+	 */
+	void changeRatio(Section * section, float w_percent) {
+		changeRatio(section->key, w_percent);
 	}
 
-	void changeRatio(std::string section, float h_percent = 0.0f) {
-		FluidLayout::changeRatio(section, 1.0f, h_percent);
+	/**
+	 * @brief Changes the width ratio of a section identified by its key.
+	 *
+	 * This implementation enforces that only the width ratio is changed,
+	 * keeping the height ratio fixed at 1.0f for RowLayout.
+	 *
+	 * @param section Key string of the section.
+	 * @param w_percent New width percentage (0.0 to 1.0).
+	 */
+	void changeRatio(std::string section, float w_percent) {
+		// Only width ratio changes are allowed in RowLayout
+		FluidLayout::changeRatio(section, w_percent, 1.0f);
 	}
 
+	/**
+	 * @brief Updates the cumulative position tracking for the layout.
+	 *
+	 * Increments the cumulative width to position the next element horizontally.
+	 *
+	 * @param t_w The width of the element just added.
+	 * @param t_h The height of the element just added (unused in RowLayout for accumulation).
+	 */
 	void updateMaxPos(int t_w, int t_h) {
+		// Update cumulative width for next element placement
 		int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
 
-		if (cum_height != h)
-			cum_height = cum_height + t_h;
-		cum_width = w;
+		if (cum_width != w)
+			cum_width = cum_width + t_w; // Increment width accumulator
 	};
 
+	/**
+	 * @brief Calculates the target position and dimensions for a child section.
+	 *
+	 * Computes the pixel values for width and height based on the percentages provided.
+	 * For RowLayout, width includes padding calculation, while height is typically full.
+	 *
+	 * @param w_percent Width percentage (0.0 - 1.0).
+	 * @param h_percent Height percentage (0.0 - 1.0).
+	 * @param padding Padding percentage to apply.
+	 * @param t_x Reference to output target x position.
+	 * @param t_y Reference to output target y position.
+	 * @param t_w Reference to output target width.
+	 * @param t_h Reference to output target height.
+	 */
+	virtual void calcTargets(float w_percent, float h_percent, float padding, int & t_x, int & t_y, int & t_w, int & t_h) {
+		int h = height.getValue().asInt(), w = width.getValue().asInt();
+
+		float w_ = w_percent + padding; // Width includes percentage + padding
+		float h_ = h_percent; // Height is usually 1.0 for Row items
+		t_w = w_ * w;
+		t_h = h_ * h;
+
+		clip(t_x, t_y, t_w, t_h);
+	};
+
+	/**
+	 * @brief Adjusts the calculated coordinates to fit within the layout constraints.
+	 *
+	 * For RowLayout, this ensures the y-position aligns with the parent's y-position.
+	 *
+	 * @param t_x Reference to target x position.
+	 * @param t_y Reference to target y position (modified).
+	 * @param t_w Reference to target width.
+	 * @param t_h Reference to target height.
+	 */
 	virtual void clip(int & t_x, int & t_y, int & t_w, int & t_h) {
 		int h = height.getValue().asInt(), w = width.getValue().asInt();
-		if (t_w >= (w - cum_width))
-			t_x = 0;
+		// Ensure y position aligns with parent's y position (no vertical offset)
+		t_y = y_pos.getValue().asInt();
 	}
 	void setup() {
 		FluidLayout::setup();
