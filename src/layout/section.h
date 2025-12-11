@@ -254,7 +254,25 @@ public:
 			}
 		}
 	}
-	virtual void draw(int x, int y, int w, int h) { }
+	virtual void draw(int x, int y, int w, int h) {
+		ofPushStyle();
+		if (data.isMember("background")) {
+			Json::Value background = data["background"];
+			if (background.isMember("hex")) {
+				int hex = std::stoul(background["hex"].asString(), nullptr, 16);
+				ofSetHexColor(hex);
+				ofDrawRectangle(X(), Y(), Width(), Height());
+			}
+		} else if (data.isMember("color")) {
+			Json::Value background = data["color"];
+			if (background.isMember("hex")) {
+				int hex = std::stoul(background["hex"].asString(), nullptr, 16);
+				ofSetHexColor(hex);
+				ofDrawRectangle(X(), Y(), Width(), Height());
+			}
+		}
+		ofPopStyle();
+	}
 
 	/**
 	 * @brief Adds a child section to this layout.
