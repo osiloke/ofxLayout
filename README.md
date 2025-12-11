@@ -56,7 +56,7 @@ After doing this, you can use your class in your layout.
 Requires openframeworks >= v0.8.3
 
 # TODO
-- [ ] Respond to window size changes
+- [x] Respond to window size changes
 - [ ] Create layout/section enter and exit animations
 - [ ] Fix layout positioning and padding
 - [ ] Respond to live changes to layout/section properties
