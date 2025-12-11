@@ -40,12 +40,13 @@ public:
 	IntProperty x_pos;
 	IntProperty y_pos;
 	BoolProperty b_displayed;
+	BoolProperty b_show_name;
 	Section * parent;
 	std::string key;
 	Json::Value data;
 	float h_p, w_p, r_h_p, r_w_p, p_p, r_p_p;
-    bool matchesWindowWidth, matchesWindowHeight;
-    bool isListeningToResize;
+	bool matchesWindowWidth, matchesWindowHeight;
+	bool isListeningToResize;
 
 	Section()
 		: h_p(0.0f)
@@ -54,9 +55,9 @@ public:
 		, r_w_p(0.0f)
 		, p_p(0.0f)
 		, r_p_p(0.0f)
-        , matchesWindowWidth(false)
-        , matchesWindowHeight(false)
-        , isListeningToResize(false){ };
+		, matchesWindowWidth(false)
+		, matchesWindowHeight(false)
+		, isListeningToResize(false) { };
 	Section(std::string key)
 		: key(key)
 		, x_pos(key + ".x")
@@ -64,15 +65,16 @@ public:
 		, width(key + ".width")
 		, height(key + ".height")
 		, b_displayed(key + ".displayed", false)
+		, b_show_name(key + ".show_name", false)
 		, h_p(0.0f)
 		, w_p(0.0f)
 		, r_h_p(0.0f)
 		, r_w_p(0.0f)
 		, p_p(0.0f)
 		, r_p_p(0.0f)
-        , matchesWindowWidth(false)
-        , matchesWindowHeight(false)
-        , isListeningToResize(false){
+		, matchesWindowWidth(false)
+		, matchesWindowHeight(false)
+		, isListeningToResize(false) {
 		data["name"] = key;
 	};
 
@@ -83,6 +85,7 @@ public:
 		, width(key + ".width")
 		, height(key + ".height")
 		, b_displayed(key + ".displayed", false)
+		, b_show_name(key + ".show_name", false)
 		, data(data)
 		, h_p(0.0f)
 		, w_p(0.0f)
@@ -90,9 +93,9 @@ public:
 		, r_w_p(0.0f)
 		, p_p(0.0f)
 		, r_p_p(0.0f)
-        , matchesWindowWidth(false)
-        , matchesWindowHeight(false)
-        , isListeningToResize(false){
+		, matchesWindowWidth(false)
+		, matchesWindowHeight(false)
+		, isListeningToResize(false) {
 	}
 
 	int X() {
@@ -189,26 +192,26 @@ public:
 	virtual void setup() {
 		resetMaxPosition();
 		it_displayable = displayable.begin();
-        if(!isListeningToResize && (matchesWindowWidth || matchesWindowHeight)){
-            ofAddListener(ofEvents().windowResized, this, &Section::_windowResized);
-            isListeningToResize = true;
-        }
+		if (!isListeningToResize && (matchesWindowWidth || matchesWindowHeight)) {
+			ofAddListener(ofEvents().windowResized, this, &Section::_windowResized);
+			isListeningToResize = true;
+		}
 	}
-    
-    void _windowResized(ofResizeEventArgs & args){
-         bool changed = false;
-         if(matchesWindowWidth){
-             this->width.setValue(args.width);
-             changed = true;
-         }
-         if(matchesWindowHeight){
-             this->height.setValue(args.height);
-             changed = true;
-         }
-         if(changed){
-             this->organize();
-         }
-    }
+
+	void _windowResized(ofResizeEventArgs & args) {
+		bool changed = false;
+		if (matchesWindowWidth) {
+			this->width.setValue(args.width);
+			changed = true;
+		}
+		if (matchesWindowHeight) {
+			this->height.setValue(args.height);
+			changed = true;
+		}
+		if (changed) {
+			this->organize();
+		}
+	}
 
 	virtual void update() {
 		std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
@@ -224,6 +227,14 @@ public:
 	virtual void draw() {
 		draw(X(), Y(), Width(), Height());
 		this->draw(0, 0);
+		if (b_show_name.getValue().asBool()) {
+			ofPushStyle();
+			ofSetColor(255, 0, 0);
+			ofNoFill();
+			ofDrawRectangle(X(), Y(), Width(), Height());
+			ofDrawBitmapString(key, X() + 10, Y() + 20);
+			ofPopStyle();
+		}
 	}
 
 	/**
@@ -375,6 +386,14 @@ public:
 		cum_height = y_pos.getValue().asInt();
 	}
 
+	virtual void setShowName(bool show) {
+		b_show_name.setValue(show);
+		std::map<std::string, Section *>::iterator it;
+		for (it = members.begin(); it != members.end(); it++) {
+			it->second->setShowName(show);
+		}
+	}
+
 	/**
          Calculates the actual position and dimensions for the object
          **/
@@ -463,9 +482,9 @@ public:
 	};
 
 	virtual ~Section() {
-        if(isListeningToResize){
-            ofRemoveListener(ofEvents().windowResized, this, &Section::_windowResized);
-        }
+		if (isListeningToResize) {
+			ofRemoveListener(ofEvents().windowResized, this, &Section::_windowResized);
+		}
 		//            clearChildren();
 	};
 };

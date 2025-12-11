@@ -5,6 +5,7 @@
 void ofApp::setup() {
 	//Property events
 	ofAddListener(PropertyEvent::events, this, &ofApp::onPropertyChanged);
+	b_show_name = false;
 	parser.fromFile("example.json");
 }
 
@@ -24,6 +25,10 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
+	if (key == 'd') {
+		b_show_name = !b_show_name;
+		SectionFactory::getSection("root")->setShowName(b_show_name);
+	}
 }
 
 //--------------------------------------------------------------
