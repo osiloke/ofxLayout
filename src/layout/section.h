@@ -229,10 +229,10 @@ public:
 		this->draw(0, 0);
 		if (b_show_name.getValue().asBool()) {
 			ofPushStyle();
-			ofSetColor(255, 0, 0);
 			ofNoFill();
+			ofSetColor(255, 0, 0);
 			ofDrawRectangle(X(), Y(), Width(), Height());
-			ofDrawBitmapString(key, X() + 10, Y() + 20);
+			ofDrawBitmapStringHighlight(key, X() + 4, Y() + 14, ofColor(0, 0, 0, 200), ofColor(255, 255, 255));
 			ofPopStyle();
 		}
 	}

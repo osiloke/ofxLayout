@@ -19,7 +19,7 @@ void ColumnLayout::addChild(Section * section) {
      cum_height = next y pos (vertical stacking)
      cum_width = x pos (always starts at 0 relative to parent)
      */
-	float w_percent = 1.0f; // Width is always 100%
+	float w_percent = props.get("w_percent", 1.0f).asFloat(); // Width can be variable
 	float h_percent = props.get("h_percent", 1.0f).asFloat(); // Height is variable
 	float padding = props.get("padding", 0.0f).asFloat();
 	int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
@@ -76,8 +76,7 @@ void ColumnLayout::updateMaxPos(int t_w, int t_h) {
 	// Update cumulative height for next element placement
 	int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
 	cum_width = w; // Width is always full
-	if (cum_height != h)
-		cum_height = cum_height + t_h; // Increment height accumulator
+	cum_height = cum_height + t_h; // Increment height accumulator
 };
 
 /**
@@ -119,6 +118,50 @@ void ColumnLayout::clip(int & t_x, int & t_y, int & t_w, int & t_h) {
 	// Ensure x position aligns with parent's x position (no horizontal offset)
 	t_x = x_pos.getValue().asInt();
 }
+
+void ColumnLayout::organize() {
+	this->resetMaxPosition();
+	int h = this->height.getValue().asInt(), w = this->width.getValue().asInt();
+
+	// Calculate total height
+	int total_h = 0;
+	for (auto & id : displayable) {
+		Section * s = members.at(id);
+		total_h += (s->h_p + s->p_p) * h;
+	}
+
+	std::string valign = data.get("valign", "top").asString();
+	if (valign == "center") {
+		cum_height += (h - total_h) / 2;
+	} else if (valign == "bottom") {
+		cum_height += (h - total_h);
+	}
+
+	std::string halign = data.get("halign", "left").asString();
+
+	ofLogNotice(this->getType()) << this->displayable.size() << " sections will be organized";
+	std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
+
+	for (it = this->displayable.rbegin(); it != this->displayable.rend(); it++) {
+		int t_x = this->cum_width, t_y = this->cum_height, t_w, t_h;
+
+		Section * section = this->members.at((*it));
+		this->calcTargets(section->w_p, section->h_p, section->p_p, t_x, t_y, t_w, t_h);
+		this->updateMaxPos(t_w, t_h);
+
+		if (halign == "center") {
+			t_x += (w - t_w) / 2;
+		} else if (halign == "right") {
+			t_x += (w - t_w);
+		}
+
+		this->calculatePadding(t_x, t_y, t_w, t_h, section->p_p);
+		section->updateItem(t_x, t_y, t_w, t_h);
+		section->organize();
+		ofLogNotice(" ==> " + section->key) << " has been organized";
+	}
+}
+
 void ColumnLayout::calculatePadding(int & t_x, int & t_y, int & t_w, int & t_h, float p) {
 	int w_p = p * t_w; //What to take off the left and right site
 	int h_p = p * t_h; //What to take off the top and bottom sides

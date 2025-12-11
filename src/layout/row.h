@@ -34,7 +34,7 @@ public:
 		// cum_height = y pos (always starts at 0 relative to parent)
 
 		float w_percent = props.get("w_percent", 1.0f).asFloat(); // Width is variable
-		float h_percent = 1.0f; // Height is always 100%
+		float h_percent = props.get("h_percent", 1.0f).asFloat(); // Height can be variable
 		float padding = props.get("padding", 0.0f).asFloat();
 		int t_x = cum_width, t_y = cum_height, t_w = 0, t_h = 0;
 
@@ -90,8 +90,7 @@ public:
 		// Update cumulative width for next element placement
 		int h = height.getValue().asInt(), w = width.getValue().asInt(), x = x_pos.getValue().asInt(), y = y_pos.getValue().asInt();
 
-		if (cum_width != w)
-			cum_width = cum_width + t_w; // Increment width accumulator
+		cum_width = cum_width + t_w; // Increment width accumulator
 	};
 
 	/**
@@ -130,10 +129,53 @@ public:
 	 * @param t_h Reference to target height.
 	 */
 	virtual void clip(int & t_x, int & t_y, int & t_w, int & t_h) {
-		int h = height.getValue().asInt(), w = width.getValue().asInt();
-		// Ensure y position aligns with parent's y position (no vertical offset)
+		int h = height.getValue().asInt();
 		t_y = y_pos.getValue().asInt();
 	}
+
+	void organize() {
+		this->resetMaxPosition();
+		int h = this->height.getValue().asInt(), w = this->width.getValue().asInt();
+
+		// Calculate total width
+		int total_w = 0;
+		for (auto & id : displayable) {
+			Section * s = members.at(id);
+			total_w += (s->w_p + s->p_p) * w;
+		}
+
+		std::string halign = data.get("halign", "left").asString();
+		if (halign == "center") {
+			cum_width += (w - total_w) / 2;
+		} else if (halign == "right") {
+			cum_width += (w - total_w);
+		}
+
+		std::string valign = data.get("valign", "top").asString();
+
+		ofLogNotice(this->getType()) << this->displayable.size() << " sections will be organized";
+		std::vector<std::string>::reverse_iterator it = this->displayable.rbegin();
+
+		for (it = this->displayable.rbegin(); it != this->displayable.rend(); it++) {
+			int t_x = this->cum_width, t_y = this->cum_height, t_w, t_h;
+
+			Section * section = this->members.at((*it));
+			this->calcTargets(section->w_p, section->h_p, section->p_p, t_x, t_y, t_w, t_h);
+			this->updateMaxPos(t_w, t_h);
+
+			if (valign == "center") {
+				t_y += (h - t_h) / 2;
+			} else if (valign == "bottom") {
+				t_y += (h - t_h);
+			}
+
+			this->calculatePadding(t_x, t_y, t_w, t_h, section->p_p);
+			section->updateItem(t_x, t_y, t_w, t_h);
+			section->organize();
+			ofLogNotice(" ==> " + section->key) << " has been organized";
+		}
+	}
+
 	void setup() {
 		FluidLayout::setup();
 	}
