@@ -12,17 +12,17 @@
 #include "ofMain.h"
 #include "sectionFactory.h"
 #include <iostream>
-class VideoSection : public Section {
+class MediaSection : public Section {
 	//Let the section factory know that you can be created dynamically
-	REGISTER_SECTION(VideoSection);
+	REGISTER_SECTION(MediaSection);
 	ofVideoGrabber videoGrabber;
 	ofPolyline polyline;
 
 public:
 	//Minimum constructor needed to use a section, This is assuming you are setting up sections from a section file
-	VideoSection(const std::string key, const Json::Value data)
+	MediaSection(const std::string key, const Json::Value data)
 		: Section(key, data) { }
-	~VideoSection() { }
+	~MediaSection() { }
 	int getColor() {
 		/**
          Example of using custom arguments from the layout file

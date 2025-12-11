@@ -8,4 +8,4 @@
 
 #include "mediaSection.h"
 using namespace ofxLayout;
-REGISTERSECTIONIMPL(VideoSection);
+REGISTERSECTIONIMPL(MediaSection);
